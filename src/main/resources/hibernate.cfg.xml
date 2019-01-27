@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+        <property name="connection.url">jdbc:postgresql://host:port/database</property>
+        <property name="connection.password">password</property>
+        <property name="connection.username">username</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="connection.pool_size">50</property>
+
+        <mapping class="ru.integration.entities.PersonEntity"/>
+        <mapping class="ru.integration.entities.PolisEntity"/>
+        <mapping class="ru.integration.entities.DocumentEntity"/>
+        <mapping class="ru.integration.entities.EvnPLBaseEntity"/>
+        <mapping class="ru.integration.entities.EvnVizitPLEntity"/>
+        <mapping class="ru.integration.entities.AuthEntity"/>
+
+        <mapping class="ru.integration.entities.schedule.FreeDateEntity"/>
+        <mapping class="ru.integration.entities.schedule.FreeTimeEntity"/>
+        <mapping class="ru.integration.entities.schedule.ListBusyDateTimeEntity"/>
+        <mapping class="ru.integration.entities.schedule.BusyTimeEntity"/>
+        <mapping class="ru.integration.entities.schedule.BusyDateEntity"/>
+        <mapping class="ru.integration.entities.schedule.MedWorkerEntity"/>
+
+        <mapping class="ru.integration.vocentities.VocMedSpecOmc"/>
+        <mapping class="ru.integration.vocentities.VocMedSpecOmcMO"/>
+        <mapping class="ru.integration.vocentities.VocMedStaffFactMO"/>
+        <mapping class="ru.integration.vocentities.VocLpuSection"/>
+        <mapping class="ru.integration.vocentities.VocLpuSectionProfile"/>
+        <mapping class="ru.integration.vocentities.VocLpuSectionById"/>
+        <mapping class="ru.integration.vocentities.VocMedStaffFactListEntity"/>
+        <mapping class="ru.integration.vocentities.MedStaffFactByIdEntity"/>
+        <mapping class="ru.integration.vocentities.VocDiagEntity"/>
+        <mapping class="ru.integration.vocentities.VocUslugaComplexEntity"/>
+    </session-factory>
+</hibernate-configuration>
