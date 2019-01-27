@@ -71,7 +71,7 @@ public class ListBusyDateTimeEntity {
         isSync = sync;
     }
 
-    public List<ListBusyDateTimeEntity> parseJSON(String json) {
+    private List<ListBusyDateTimeEntity> parseJson(String json) {
         JsonParser parser = new JsonParser();
         JsonObject jparse = parser.parse(json).getAsJsonObject();
         if (Methods.checkCode(jparse)) {
@@ -96,7 +96,7 @@ public class ListBusyDateTimeEntity {
     }
 
     public void saveJson(String json) {
-        List<ListBusyDateTimeEntity> list = new ListBusyDateTimeEntity().parseJSON(json);
+        List<ListBusyDateTimeEntity> list = new ListBusyDateTimeEntity().parseJson(json);
         new DaoImpl().saveList(list);
     }
 }

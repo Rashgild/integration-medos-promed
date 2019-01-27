@@ -1,9 +1,6 @@
 package ru.integration.api;
 
-import com.google.gson.Gson;
-
 import java.util.HashMap;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -12,8 +9,6 @@ import javax.ws.rs.core.Response;
 
 import ru.integration.util.Methods;
 
-import static ru.integration.util.Methods.creteGetRequest;
-
 
 @Path("/person")
 public class Person {
@@ -21,11 +16,11 @@ public class Person {
     @GET
     @Path("/getperson")
     @Produces("application/json;charset=UTF-8")
-    public static String getPerson(@QueryParam("surname") @DefaultValue("") String surname,
-                                   @QueryParam("firstname") @DefaultValue("") String firstname,
-                                   @QueryParam("middlename") @DefaultValue("") String middlename,
-                                   @QueryParam("birth") @DefaultValue("") String birth,
-                                   @QueryParam("snils") @DefaultValue("") String snils) {
+    public static String getPerson(@QueryParam("surname") String surname,
+                                   @QueryParam("firstname") String firstname,
+                                   @QueryParam("middlename") String middlename,
+                                   @QueryParam("birth") String birth,
+                                   @QueryParam("snils") String snils) {
 
         HashMap<String, String> params = new HashMap<>();
         params.put("PersonSurName_SurName", surname);
@@ -47,7 +42,7 @@ public class Person {
     @GET
     @Path("/getPersonById")
     @Produces("application/json;charset=UTF-8")
-    public static String getPersonById(@QueryParam("Person_id") @DefaultValue("") String Person_id) {
+    public static String getPersonById(@QueryParam("Person_id") String Person_id) {
         HashMap<String, String> params = new HashMap<>();
         params.put("Person_id", Person_id);
 
@@ -57,10 +52,10 @@ public class Person {
     @GET
     @Path("/setperson")
     @Produces("application/json;charset=UTF-8")
-    public static String setPerson(@QueryParam("surname") @DefaultValue("Test_api") String surname,
-                                   @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
-                                   @QueryParam("birth") @DefaultValue("Test_api12") String birth,
-                                   @QueryParam("snils") @DefaultValue("Test_api12") String snils) {
+    public static String setPerson(@QueryParam("surname") String surname,
+                                   @QueryParam("firstname") String firstname,
+                                   @QueryParam("birth") String birth,
+                                   @QueryParam("snils") String snils) {
         Response response = null;
         return response.readEntity(String.class);
     }
@@ -70,10 +65,10 @@ public class Person {
    /* @POST
     @Path("/setperson")
     @Produces("application/json;charset=UTF-8")
-    public static String setPerson(@QueryParam("surname") @DefaultValue("Test_api") String surname,
-                                    @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
-                                    @QueryParam("birth") @DefaultValue("Test_api12") String birth,
-                                    @QueryParam("snils") @DefaultValue("Test_api12") String snils){
+    public static String setPerson(@QueryParam("surname") String surname,
+                                    @QueryParam("firstname") String firstname,
+                                    @QueryParam("birth") String birth,
+                                    @QueryParam("snils") String snils){
 
         Client client = ClientBuilder.newClient();
         Response response =  client
@@ -94,10 +89,10 @@ public class Person {
     //@PUT
     /*@Path("/updateperson")
     @Produces("application/json;charset=UTF-8")
-    public static String updatePerson(@QueryParam("surname") @DefaultValue("Test_api") String surname,
-                                     @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
-                                     @QueryParam("birth") @DefaultValue("Test_api12") String birth,
-                                     @QueryParam("snils") @DefaultValue("Test_api12") String snils){
+    public static String updatePerson(@QueryParam("surname") String surname,
+                                     @QueryParam("firstname") String firstname,
+                                     @QueryParam("birth") String birth,
+                                     @QueryParam("snils") String snils){
 
         Client client = ClientBuilder.newClient();
         Response response =  client

@@ -9,7 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -30,7 +29,7 @@ public class VocSync {
     @GET
     @Path("/sync")
     @Produces("application/json;charset=UTF-8")
-    public static String sync(@QueryParam("TableName") @DefaultValue("") String tableName) {
+    public static String sync(@QueryParam("TableName") String tableName) {
 
         //TODO Сессия
         GlobalVariables.sessionId = "fj4ack71b3645667k9auelgbh6";
@@ -66,7 +65,12 @@ public class VocSync {
         StringBuilder sb = new StringBuilder();
 
         for (Voc v : vocs) {
-            sb.append("insert into test(name,code) VALUES ('" + v.getName() + "','" + v.getCode() + "'); ");
+            sb
+                    .append("insert into test(name,code) VALUES ('")
+                    .append(v.getName())
+                    .append("','")
+                    .append(v.getCode())
+                    .append("'); ");
         }
         return sb.toString();
     }
@@ -75,7 +79,7 @@ public class VocSync {
     @GET
     @Path("/syncOrgSMO")
     @Produces("application/json;charset=UTF-8")
-    public static String syncOrgSMO(@QueryParam("Password") @DefaultValue("Test_api12") String tableName) {
+    public static String syncOrgSMO(@QueryParam("tableName") String tableName) {
 
         String json = sync("dbo.OrgSmo");
         JsonParser parser = new JsonParser();
@@ -100,7 +104,12 @@ public class VocSync {
             for (Voc v2 : vocList1) {
 
                 if (v.getName().equals(v2.getName())) {
-                    sb.append("update REG_IC set promedcode = '" + v.getId() + "' where id = " + v2.getId() + "; \n");
+                    sb
+                            .append("update REG_IC set promedcode = '")
+                            .append(v.getId())
+                            .append("' where id = ")
+                            .append(v2.getId())
+                            .append("; \n");
                 }
             }
         }
@@ -111,22 +120,26 @@ public class VocSync {
     @GET
     @Path("/syncvocworfunction")
     @Produces("application/json;charset=UTF-8")
-    public static String syncvocworfunction(@QueryParam("Password") @DefaultValue("Test_api12") String tableName) {
+    public static String syncvocworfunction(@QueryParam("tableName") String tableName) {
 
 
         List<Voc> vocList = selecttmp("select * from voctmp");
         List<Voc> vocList1 = selectedVocFromBase("select * from vocworkfunction");
 
         StringBuilder sb = new StringBuilder();
-        StringBuilder sb2 = new StringBuilder();
         for (Voc v : vocList1) {
             for (Voc v2 : vocList) {
-
-                // System.out.println(v.getName()+"|"+v2.getName());
-                //if(v.getName().contains(v2.getName())){
                 if (v.getName().equals(v2.getName())) {
-                    sb.append("update vocworkfunction set fsscode ='" + v2.getShortcode() + "' ,fssshortname= '" + v2.getShortname() + "' where id = " + v.getId() + "\n");
-                    sb.append(v2.getName() + "---" + v.getName());
+                    sb
+                            .append("update vocworkfunction set fsscode ='")
+                            .append(v2.getShortcode())
+                            .append("' ,fssshortname= '")
+                            .append(v2.getShortname())
+                            .append("' where id = ")
+                            .append(v.getId()).append("\n")
+                            .append(v2.getName())
+                            .append("---")
+                            .append(v.getName());
                 }
             }
         }
@@ -152,7 +165,7 @@ public class VocSync {
     }
 
 
-    public static List selectedVocFromBase(String sql) {
+    private static List selectedVocFromBase(String sql) {
 
         ResultSet resultSet = SQLUtils.select(sql);
         List<Voc> vocList = new ArrayList<>();
@@ -169,7 +182,7 @@ public class VocSync {
         return vocList;
     }
 
-    public static String isFull(JsonObject obj, String name) {
+    private static String isFull(JsonObject obj, String name) {
 
         if (obj.has(name)) {
             if (obj.get(name).isJsonNull()) {

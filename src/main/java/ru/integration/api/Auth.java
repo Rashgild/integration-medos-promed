@@ -6,7 +6,6 @@ import com.google.gson.JsonParser;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -21,14 +20,17 @@ import ru.integration.entities.AuthEntity;
 import ru.integration.util.GlobalVariables;
 import ru.integration.util.Methods;
 
+import static ru.integration.util.GlobalVariables.login;
+import static ru.integration.util.GlobalVariables.password;
+
 @Path("/auth")
 public class Auth {
 
     @GET
     @Path("/login")
     @Produces("application/json;charset=UTF-8")
-    public static String login(@QueryParam("login") @DefaultValue("Test_api") String login,
-                               @QueryParam("Password") @DefaultValue("Test_api12") String password) {
+    public static String login(@QueryParam("login") String login,
+                               @QueryParam("Password") String password) {
 
         Map<String, String> params = new HashMap<>();
         params.put("login", login);
@@ -55,12 +57,12 @@ public class Auth {
     @GET
     @Path("getSessionId")
     @Produces("application/json;charset=UTF-8")
-    public static String getSessionId(@QueryParam("test") String test) {
+    public static String getSessionId() {
         return "{\"sessionId\":\"" + GlobalVariables.sessionId + "\"}";
     }
 
     public static String login() {
-        String ret = login("Test_api", "Test_api12");
+        String ret = login(login, password);
         JsonParser parser = new JsonParser();
         JsonObject jparse = parser.parse(ret).getAsJsonObject();
         GlobalVariables.sessionId = "0";

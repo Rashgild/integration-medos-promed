@@ -1,6 +1,5 @@
 package ru.integration.api;
 
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -13,7 +12,7 @@ public class Test {
     @GET
     @Path("/test1")
     @Produces("application/json;charset=UTF-8")
-    public static String sync(@QueryParam("id") @DefaultValue("") String id) {
+    public static String sync(@QueryParam("id") String id) {
         System.out.println(id);
         return id;
     }

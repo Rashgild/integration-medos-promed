@@ -8,7 +8,7 @@ public class HibernateMedosSessionFactory {
 
     private static SessionFactory sessionFactory = buildSessionFactory();
 
-    public static SessionFactory buildSessionFactory() {
+    private static SessionFactory buildSessionFactory() {
         if (sessionFactory != null) {
             return sessionFactory;
         }

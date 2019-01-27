@@ -14,7 +14,17 @@ import ru.integration.entities.schedule.FreeDateEntity;
 import ru.integration.entities.schedule.FreeTimeEntity;
 import ru.integration.entities.schedule.MedWorkerEntity;
 import ru.integration.util.GlobalVariables;
-import ru.integration.vocEntity.*;
+import ru.integration.vocEntity.MedStaffFactById;
+import ru.integration.vocEntity.MedosMedservice;
+import ru.integration.vocEntity.VocDiag;
+import ru.integration.vocEntity.VocLpuSection;
+import ru.integration.vocEntity.VocLpuSectionById;
+import ru.integration.vocEntity.VocLpuSectionProfile;
+import ru.integration.vocEntity.VocMedSpecOmc;
+import ru.integration.vocEntity.VocMedSpecOmcMO;
+import ru.integration.vocEntity.VocMedStaffFactList;
+import ru.integration.vocEntity.VocMedStaffFactMO;
+import ru.integration.vocEntity.VocUslugaComplex;
 
 import static ru.integration.api.Person.getPersonById;
 import static ru.integration.util.Methods.creteGetRequest;
@@ -47,15 +57,12 @@ public class VocOperations {
     @Path("/medStaffFactByMOSync")
     @Produces("application/json;charset=UTF-8")
     public static String medStaffFactByMOSync() {
-
         List<VocMedSpecOmcMO> vocMedSpecOmcMOS = (List<VocMedSpecOmcMO>) new DaoImpl<>().getAllE("VocMedSpecOmcMO");
-        String jsonend = "";
         for (VocMedSpecOmcMO v : vocMedSpecOmcMOS) {
             HashMap<String, String> params = new HashMap<>();
             params.put("lpu_id", GlobalVariables.lpu_id);
             params.put("MedSpecOms_id", v.getMedSpecOmc_id());
             String json = creteGetRequest("api/MedStaffFact/MedStaffFactByMO", params);
-            jsonend += json;
             new DaoImpl().saveList(new VocMedStaffFactMO().parseJSON(json, Integer.valueOf(v.getMedSpecOmc_id())));
         }
         return "jsonend";
@@ -65,7 +72,6 @@ public class VocOperations {
     @Path("/lpuSectionListByMO")
     @Produces("application/json;charset=UTF-8")
     public static String LpuSectionListByMO() {
-
         HashMap<String, String> params = new HashMap<>();
         params.put("lpu_id", GlobalVariables.lpu_id);
         String json = creteGetRequest("api/Lpu/LpuSectionListByMO", params);
@@ -266,7 +272,7 @@ public class VocOperations {
     @GET
     @Path("/getUsluga")
     public static String getUsluga() {
-        new DaoImpl().saveList(new VocUslugaComplex().parseJSON(syncVocRefbook("dbo.UslugaComplex")));
+        new DaoImpl().saveList(new VocUslugaComplex().parseJson(syncVocRefbook("dbo.UslugaComplex")));
         return "{'ok':'0'}";
     }
 

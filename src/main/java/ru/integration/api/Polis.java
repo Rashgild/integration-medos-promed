@@ -1,6 +1,5 @@
 package ru.integration.api;
 
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -21,10 +20,10 @@ public class Polis {
     @GET
     @Path("/getpolis")
     @Produces("application/json;charset=UTF-8")
-    public static String getPolis(@QueryParam("Person_id") @DefaultValue("") String personId,
-                                  @QueryParam("Polis_Ser") @DefaultValue("") String polisSer,
-                                  @QueryParam("Polis_Num") @DefaultValue("") String polisNum,
-                                  @QueryParam("Polis_id") @DefaultValue("") String polisId) {
+    public static String getPolis(@QueryParam("Person_id") String personId,
+                                  @QueryParam("Polis_Ser") String polisSer,
+                                  @QueryParam("Polis_Num") String polisNum,
+                                  @QueryParam("Polis_id") String polisId) {
 
         Client client = ClientBuilder.newClient();
         Response response = client
@@ -45,10 +44,10 @@ public class Polis {
     @POST
     @Path("/setpolis")
     @Produces("application/json;charset=UTF-8")
-    public static String setPolis(@QueryParam("surname") @DefaultValue("Test_api") String surname,
-                                  @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
-                                  @QueryParam("birth") @DefaultValue("Test_api12") String birth,
-                                  @QueryParam("snils") @DefaultValue("Test_api12") String snils) {
+    public static String setPolis(@QueryParam("surname") String surname,
+                                  @QueryParam("firstname") String firstname,
+                                  @QueryParam("birth") String birth,
+                                  @QueryParam("snils") String snils) {
 
         Client client = ClientBuilder.newClient();
         Response response = client
@@ -69,10 +68,10 @@ public class Polis {
     @PUT
     @Path("/updatepolis")
     @Produces("application/json;charset=UTF-8")
-    public static String updatePolis(@QueryParam("surname") @DefaultValue("Test_api") String surname,
-                                     @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
-                                     @QueryParam("birth") @DefaultValue("Test_api12") String birth,
-                                     @QueryParam("birth") @DefaultValue("Test_api12") String snils) {
+    public static String updatePolis(@QueryParam("surname") String surname,
+                                     @QueryParam("firstname") String firstname,
+                                     @QueryParam("birth") String birth,
+                                     @QueryParam("birth") String snils) {
 
         Client client = ClientBuilder.newClient();
         Response response = client

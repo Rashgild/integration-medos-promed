@@ -8,7 +8,7 @@ public interface Dao<Id, Entity> {
 
     Entity getById(Id id);
 
-    public List<Entity> getAll(Entity entity, String entityName);
+    List<Entity> getAll(Entity entity, String entityName);
 
     void save(Entity entity);
 

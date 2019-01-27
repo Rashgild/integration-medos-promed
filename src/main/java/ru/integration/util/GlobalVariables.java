@@ -2,14 +2,14 @@ package ru.integration.util;
 
 public class GlobalVariables {
 
-    public static String rootPath;
-    public static String dbhost = "";
-    public static String dbdriver = "";
-    public static String dblogin = "";
-    public static String dbpassword = "";
-    public static String endpoint="";
-    public static String lpu_id="";
-
-
-    public static String sessionId="";
+    static String rootPath;
+    static String dbhost = "";
+    static String dbdriver = "";
+    static String dblogin = "";
+    static String dbpassword = "";
+    public static String endpoint = "";
+    public static String lpu_id = "";
+    public static String login = "";
+    public static String password = "";
+    public static String sessionId = "";
 }

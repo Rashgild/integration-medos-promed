@@ -1,6 +1,5 @@
 package ru.integration.api;
 
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -19,8 +18,8 @@ public class EvnPLBase {
     @GET
     @Path("/getevn")
     @Produces("application/json;charset=UTF-8")
-    public static String getEvn(@QueryParam("Person_id") @DefaultValue("") String person_id,
-                                @QueryParam("EvnPL_NumCard") @DefaultValue("") String evnPL_NumCard) {
+    public static String getEvn(@QueryParam("Person_id") String person_id,
+                                @QueryParam("EvnPL_NumCard") String evnPL_NumCard) {
 
         Response response = ClientBuilder.newClient()
                 .target(GlobalVariables.endpoint)
@@ -37,8 +36,8 @@ public class EvnPLBase {
     @POST
     @Path("/setevn")
     @Produces("application/json;charset=UTF-8")
-    public static String setEvn(@QueryParam("Person_id") @DefaultValue("") String person_id,
-                                @QueryParam("EvnPL_NumCard") @DefaultValue("") String evnPL_NumCard) {
+    public static String setEvn(@QueryParam("Person_id") String person_id,
+                                @QueryParam("EvnPL_NumCard") String evnPL_NumCard) {
 
         Response response = ClientBuilder.newClient()
                 .target(GlobalVariables.endpoint)

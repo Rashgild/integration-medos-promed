@@ -1,6 +1,5 @@
 package ru.integration.api;
 
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -20,10 +19,10 @@ public class Document {
     @GET
     @Path("/getDocument")
     @Produces("application/json;charset=UTF-8")
-    public static String getDocument(@QueryParam("Person_id") @DefaultValue("") String personId,
-                                     @QueryParam("Document_Ser") @DefaultValue("") String documentSer,
-                                     @QueryParam("Document_Num") @DefaultValue("") String documentNum,
-                                     @QueryParam("Document_id") @DefaultValue("") String documentId) {
+    public static String getDocument(@QueryParam("Person_id") String personId,
+                                     @QueryParam("Document_Ser") String documentSer,
+                                     @QueryParam("Document_Num") String documentNum,
+                                     @QueryParam("Document_id") String documentId) {
 
         Client client = ClientBuilder.newClient();
         Response response = client
@@ -44,10 +43,10 @@ public class Document {
     @POST
     @Path("/setDocument")
     @Produces("application/json;charset=UTF-8")
-    public static String setDocument(@QueryParam("surname") @DefaultValue("Test_api") String surname,
-                                     @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
-                                     @QueryParam("birth") @DefaultValue("Test_api12") String birth,
-                                     @QueryParam("snils") @DefaultValue("Test_api12") String snils) {
+    public static String setDocument(@QueryParam("surname") String surname,
+                                     @QueryParam("firstname") String firstname,
+                                     @QueryParam("birth") String birth,
+                                     @QueryParam("snils") String snils) {
 
         Client client = ClientBuilder.newClient();
         Response response = client
@@ -66,10 +65,10 @@ public class Document {
     @PUT
     @Path("/updateDocument")
     @Produces("application/json;charset=UTF-8")
-    public static String updateDocument(@QueryParam("surname") @DefaultValue("Test_api") String surname,
-                                        @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
-                                        @QueryParam("birth") @DefaultValue("Test_api12") String birth,
-                                        @QueryParam("snils") @DefaultValue("Test_api12") String snils) {
+    public static String updateDocument(@QueryParam("surname") String surname,
+                                        @QueryParam("firstname") String firstname,
+                                        @QueryParam("birth") String birth,
+                                        @QueryParam("snils") String snils) {
 
         Client client = ClientBuilder.newClient();
         Response response = client

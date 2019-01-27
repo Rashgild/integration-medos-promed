@@ -1,6 +1,5 @@
 package ru.integration.api;
 
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,14 +10,15 @@ import javax.ws.rs.core.Response;
 
 import ru.integration.util.GlobalVariables;
 
+
 @Path("/evnVizitPL")
 public class EvnVizitPL {
 
     @GET
     @Path("/getVizit")
     @Produces("application/json;charset=UTF-8")
-    public static String getEvnVizit(@QueryParam("EvnPLBaseId") @DefaultValue("") String EvnPLBaseId,
-                                     @QueryParam("EvnVizitPLDate") @DefaultValue("") String EvnVizitPLDate) {
+    public static String getEvnVizit(@QueryParam("EvnPLBaseId") String EvnPLBaseId,
+                                     @QueryParam("EvnVizitPLDate") String EvnVizitPLDate) {
 
         Response response = ClientBuilder.newClient()
                 .target(GlobalVariables.endpoint)

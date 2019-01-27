@@ -57,7 +57,7 @@ public class Methods {
     }
 
     public static String creteGetRequest(String endpoint, String path) {
-        return creteGetRequest(endpoint, path, new HashMap<String, String>());
+        return creteGetRequest(endpoint, path, new HashMap<>());
     }
 
     public static String creteGetRequest(String path, Map<String, String> params) {
@@ -116,8 +116,7 @@ public class Methods {
     }
 
     public static boolean isStringEmpty(String str) {
-        if (!str.equals("")) return true;
-        else return false;
+        return !str.equals("");
     }
 
 

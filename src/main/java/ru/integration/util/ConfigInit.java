@@ -27,6 +27,9 @@ public class ConfigInit implements ServletContextListener {
         GlobalVariables.sessionId = resource.getString("sessionId");
         GlobalVariables.endpoint =resource.getString("endpoint");
         GlobalVariables.lpu_id =resource.getString("lpu_id");
+        GlobalVariables.login =resource.getString("login");
+        GlobalVariables.password =resource.getString("password");
+
         System.out.println("rootPath="+ GlobalVariables.rootPath);
     }
 }
