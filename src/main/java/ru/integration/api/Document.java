@@ -44,10 +44,10 @@ public class Document {
     @POST
     @Path("/setDocument")
     @Produces("application/json;charset=UTF-8")
-    public static String setDocument(@QueryParam("login") @DefaultValue("Test_api") String surname,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String firstname,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String birth,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String snils) {
+    public static String setDocument(@QueryParam("surname") @DefaultValue("Test_api") String surname,
+                                     @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
+                                     @QueryParam("birth") @DefaultValue("Test_api12") String birth,
+                                     @QueryParam("snils") @DefaultValue("Test_api12") String snils) {
 
         Client client = ClientBuilder.newClient();
         Response response = client
@@ -66,10 +66,10 @@ public class Document {
     @PUT
     @Path("/updateDocument")
     @Produces("application/json;charset=UTF-8")
-    public static String updateDocument(@QueryParam("login") @DefaultValue("Test_api") String surname,
-                                        @QueryParam("Password") @DefaultValue("Test_api12") String firstname,
-                                        @QueryParam("Password") @DefaultValue("Test_api12") String birth,
-                                        @QueryParam("Password") @DefaultValue("Test_api12") String snils) {
+    public static String updateDocument(@QueryParam("surname") @DefaultValue("Test_api") String surname,
+                                        @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
+                                        @QueryParam("birth") @DefaultValue("Test_api12") String birth,
+                                        @QueryParam("snils") @DefaultValue("Test_api12") String snils) {
 
         Client client = ClientBuilder.newClient();
         Response response = client

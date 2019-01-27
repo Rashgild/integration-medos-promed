@@ -47,9 +47,7 @@ public class Address{
                                      @QueryParam("Password") @DefaultValue("Test_api12") String firstname,
                                      @QueryParam("Password") @DefaultValue("Test_api12") String birth,
                                      @QueryParam("Password") @DefaultValue("Test_api12") String snils){
-/** 1-
- *
- */
+
         Client client = ClientBuilder.newClient();
         Response response =  client
                 .target(GlobalVariables.endpoint)

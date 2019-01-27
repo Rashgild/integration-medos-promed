@@ -44,7 +44,6 @@ public class VocSync {
                 .get();
 
         System.out.println("SID>>|" + GlobalVariables.sessionId);
-        //System.out.println(response);
         return parseVoc(response.readEntity(String.class));
     }
 
@@ -66,7 +65,6 @@ public class VocSync {
 
         StringBuilder sb = new StringBuilder();
 
-        //insert into test(name) VALUES ('');
         for (Voc v : vocs) {
             sb.append("insert into test(name,code) VALUES ('" + v.getName() + "','" + v.getCode() + "'); ");
         }

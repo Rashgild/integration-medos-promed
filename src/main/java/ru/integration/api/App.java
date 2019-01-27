@@ -6,7 +6,6 @@ import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
 import ru.integration.api.policlinicCase.Policlinic;
-import ru.integration.api.policlinicCase.PoliclinicTest;
 import ru.integration.api.schedule.CalendarApi;
 import ru.integration.api.vocsync.VocOperations;
 import ru.integration.api.vocsync.VocSync;
@@ -26,7 +25,6 @@ public class App extends Application {
         h.add(VocOperations.class);
         h.add(CalendarApi.class);
         h.add(Policlinic.class);
-        h.add(PoliclinicTest.class);
 
         return h;
     }

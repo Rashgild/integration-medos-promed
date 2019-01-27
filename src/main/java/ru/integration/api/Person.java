@@ -48,15 +48,6 @@ public class Person {
     @Path("/getPersonById")
     @Produces("application/json;charset=UTF-8")
     public static String getPersonById(@QueryParam("Person_id") @DefaultValue("") String Person_id) {
-
-       /* Response response = ClientBuilder.newClient()
-                .target(endpoint)
-                .path("api/Person")
-                .queryParam("Person_id", Person_id)
-                .request(MediaType.APPLICATION_JSON)
-                .header("Cookie","PHPSESSID="+sessionId)
-                .get();*/
-
         HashMap<String, String> params = new HashMap<>();
         params.put("Person_id", Person_id);
 
@@ -66,41 +57,11 @@ public class Person {
     @GET
     @Path("/setperson")
     @Produces("application/json;charset=UTF-8")
-    public static String setPerson(@QueryParam("login") @DefaultValue("Test_api") String surname,
-                                   @QueryParam("Password") @DefaultValue("Test_api12") String firstname,
-                                   @QueryParam("Password") @DefaultValue("Test_api12") String birth,
-                                   @QueryParam("Password") @DefaultValue("Test_api12") String snils) {
-
-        //1517251
-        /*PersonEntity personEntity = new PersonEntity();
-        personEntity.setPersonSurName_SurName("Testingov");
-        personEntity.setPersonFirName_FirName("Test");
-        personEntity.setPersonBirthDay_BirthDay("01.01.1993");
-        personEntity.setPerson_Sex_id("1");
-        personEntity.setSocStatus_id("10000054");*/
-
-        Gson gson = new Gson();
-        /*    String jsonInString = gson.toJson(personEntity);*/
-
-        // System.out.println(jsonInString);
-        Response response = null;/*ClientBuilder.newClient()
-                .target(endpoint)
-                .path("api/Person")
-                //.queryParam("PersonSurName_SurName", surname)
-                //.queryParam("PersonFirName_FirName", firstname)
-                //.queryParam("PersonBirthDay_BirthDay", birth)
-                //.queryParam("PersonSnils_Snils", snils)
-                .request(MediaType.APPLICATION_JSON)
-                .header("Cookie","PHPSESSID="+sessionId)
-                .post(Entity.json(jsonInString),Response.class);*/
-                /*.post(Entity.json("{" +
-                        "\"PersonSurName_SurName\":\"Testingov\"" +
-                        ",\"PersonFirName_FirName\":\"Test\"" +
-                        ",\"PersonBirthDay_BirthDay\":\"01.01.2001\"" +
-                        ",\"Person_Sex_id\":\"1\"" +
-                        ",\"SocStatus_id\":\"10000056\"}"),Response.class);*/
-
-        // "\"PersonFirName_FirName\":\"Test\"
+    public static String setPerson(@QueryParam("surname") @DefaultValue("Test_api") String surname,
+                                   @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
+                                   @QueryParam("birth") @DefaultValue("Test_api12") String birth,
+                                   @QueryParam("snils") @DefaultValue("Test_api12") String snils) {
+        Response response = null;
         return response.readEntity(String.class);
     }
 
@@ -109,10 +70,10 @@ public class Person {
    /* @POST
     @Path("/setperson")
     @Produces("application/json;charset=UTF-8")
-    public static String setPerson(@QueryParam("login") @DefaultValue("Test_api") String surname,
-                                    @QueryParam("Password") @DefaultValue("Test_api12") String firstname,
-                                    @QueryParam("Password") @DefaultValue("Test_api12") String birth,
-                                    @QueryParam("Password") @DefaultValue("Test_api12") String snils){
+    public static String setPerson(@QueryParam("surname") @DefaultValue("Test_api") String surname,
+                                    @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
+                                    @QueryParam("birth") @DefaultValue("Test_api12") String birth,
+                                    @QueryParam("snils") @DefaultValue("Test_api12") String snils){
 
         Client client = ClientBuilder.newClient();
         Response response =  client
@@ -133,10 +94,10 @@ public class Person {
     //@PUT
     /*@Path("/updateperson")
     @Produces("application/json;charset=UTF-8")
-    public static String updatePerson(@QueryParam("login") @DefaultValue("Test_api") String surname,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String firstname,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String birth,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String snils){
+    public static String updatePerson(@QueryParam("surname") @DefaultValue("Test_api") String surname,
+                                     @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
+                                     @QueryParam("birth") @DefaultValue("Test_api12") String birth,
+                                     @QueryParam("snils") @DefaultValue("Test_api12") String snils){
 
         Client client = ClientBuilder.newClient();
         Response response =  client
@@ -151,6 +112,4 @@ public class Person {
 
         return  response.readEntity(String.class);
     }*/
-
-
 }

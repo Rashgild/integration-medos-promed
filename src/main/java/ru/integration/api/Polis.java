@@ -45,10 +45,10 @@ public class Polis {
     @POST
     @Path("/setpolis")
     @Produces("application/json;charset=UTF-8")
-    public static String setPolis(@QueryParam("login") @DefaultValue("Test_api") String surname,
-                                  @QueryParam("Password") @DefaultValue("Test_api12") String firstname,
-                                  @QueryParam("Password") @DefaultValue("Test_api12") String birth,
-                                  @QueryParam("Password") @DefaultValue("Test_api12") String snils) {
+    public static String setPolis(@QueryParam("surname") @DefaultValue("Test_api") String surname,
+                                  @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
+                                  @QueryParam("birth") @DefaultValue("Test_api12") String birth,
+                                  @QueryParam("snils") @DefaultValue("Test_api12") String snils) {
 
         Client client = ClientBuilder.newClient();
         Response response = client
@@ -69,10 +69,10 @@ public class Polis {
     @PUT
     @Path("/updatepolis")
     @Produces("application/json;charset=UTF-8")
-    public static String updatePolis(@QueryParam("login") @DefaultValue("Test_api") String surname,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String firstname,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String birth,
-                                     @QueryParam("Password") @DefaultValue("Test_api12") String snils) {
+    public static String updatePolis(@QueryParam("surname") @DefaultValue("Test_api") String surname,
+                                     @QueryParam("firstname") @DefaultValue("Test_api12") String firstname,
+                                     @QueryParam("birth") @DefaultValue("Test_api12") String birth,
+                                     @QueryParam("birth") @DefaultValue("Test_api12") String snils) {
 
         Client client = ClientBuilder.newClient();
         Response response = client

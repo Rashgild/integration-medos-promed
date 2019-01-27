@@ -128,7 +128,6 @@ public class Policlinic {
                             .put("VizitType_id", isNull(vr.getPromedcode2(), "VizitType_id") ? null : vr.getPromedcode2())
                             .put("PayType_id", isNull(vss.getPromedcode(), "PayType_id") ? null : vss.getPromedcode());
 
-
                     System.out.println(">>>" + visit.getId());
                     firstVis.put("Mes_id", isNull(wf.getPromedcodeLpusection(), "Mes_id") ? null : wf.getPromedcodeLpusection());
                     firstVis.put("Diag_id", isNull(mkb.getPromedcode(), "Diag_id") ? null : mkb.getPromedcode());
@@ -154,7 +153,6 @@ public class Policlinic {
 
             MedosPatientEntity patientEntity = (MedosPatientEntity) new DaoImpl().getEntityM("MedosPatientEntity", "id=" + policlinicCase.getPatient_id());
 
-            //System.out.println("<<MakePatient>>");
             JSONObject patient = new JSONObject();
             patient.put("lastname", isNull(patientEntity.getLastname(), "lastname") ? null : patientEntity.getLastname())
                     .put("firstname", isNull(patientEntity.getFirstname(), "firstname") ? null : patientEntity.getFirstname())
@@ -162,15 +160,10 @@ public class Policlinic {
                     .put("birthday", isNull(String.valueOf(patientEntity.getBirthday()), "birthday") ? null : patientEntity.getBirthday())
                     .put("snils", isNull(patientEntity.getSnils(), "snils") ? null : patientEntity.getSnils());
 
-            //System.out.println("<<PutJson>>");
             json.put("visits", jvisit);
             json.put("patient", patient);
-            //System.out.println("<<PutJsonJSON>>");
             jtap.put(json);
-            //System.out.println("<<AllGood>>");
         }
-
-        //System.out.println(new JSONObject().put("tap",jtap).toString());
         return new JSONObject().put("tap", jtap).toString();
     }
 
@@ -417,7 +410,6 @@ public class Policlinic {
                     }
                 }
             } else {
-
                 HashMap<String, String> params = new HashMap<>();
                 params.put("error", "'true'");
                 params.put("isExport", "'false'");
@@ -431,7 +423,6 @@ public class Policlinic {
             System.out.println((proc * 100) / countEvns + " %");
             proc++;
         }
-        //cretePostRequest()
 
         return "";
     }
@@ -491,7 +482,6 @@ public class Policlinic {
                                    @QueryParam("month") String month,
                                    @QueryParam("dateStart") String dateStart,
                                    @QueryParam("dateEnd") String dateEnd) {
-
 
         int iDateEnd = Integer.parseInt(dateEnd);
         for (int iDateStart = Integer.parseInt(dateStart); iDateStart <= iDateEnd; iDateStart++) {

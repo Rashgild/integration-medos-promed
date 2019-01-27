@@ -64,8 +64,8 @@ public class CalendarApi {
     @Path("/getBusyDateTimes")
     @Produces("application/json;charset=UTF-8")
     public static String getBusyDateTimes() {
-        List<ListBusyDateTimeEntity> listBusyDateTimeEntity = (List<ListBusyDateTimeEntity>) new DaoImpl<>()
-                .getAllE("ListBusyDateTimeEntity", " isSync=false or isSync is null");
+        List<ListBusyDateTimeEntity> listBusyDateTimeEntity
+                = (List<ListBusyDateTimeEntity>) new DaoImpl<>().getAllE("ListBusyDateTimeEntity", " isSync=false or isSync is null");
 
         List<BusyTimeEntity> busyTimeEntities = new ArrayList<>();
 
@@ -94,7 +94,6 @@ public class CalendarApi {
 
                         busyDateEntity.setTimeTableGraf_begTime(getDate(checkJsonObj(sect, "TimeTableGraf_begTime")));
 
-
                         busyTimeEntity.setTimeTableGraf_id(v.getTimeTableGraf_id());
                         busyTimeEntity.setTimeTableGraf_begTime(Timestamp.valueOf(checkJsonObj(sect, "TimeTableGraf_begTime")));
                         busyTimeEntity.setTimeTableGraf_begDate(getDate(checkJsonObj(sect, "TimeTableGraf_begTime")));
@@ -121,12 +120,7 @@ public class CalendarApi {
         busyTimeEntities = new DaoImpl().sync(busyTimeEntities);
         busyTimeEntities = new DaoImpl().sync(busyTimeEntities, fromBase);
         new DaoImpl().saveList(busyTimeEntities);
-
-
-        fromBase = new DaoImpl().getAllE("BusyDateEntity");
-        //busyDateEntities  = new DaoImpl().sync(busyDateEntities);
-        //busyDateEntities  = new DaoImpl().sync(busyDateEntities,fromBase);
-        //new DaoImpl().saveList(busyDateEntities);
+        new DaoImpl().getAllE("BusyDateEntity");
         return "";
     }
 
@@ -212,8 +206,6 @@ public class CalendarApi {
                     }
                 }
             }
-            //return updateString
-            //throw new NullPointerException();
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
