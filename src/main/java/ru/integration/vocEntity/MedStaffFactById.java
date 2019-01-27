@@ -1,4 +1,4 @@
-package ru.integration.vocentities;
+package ru.integration.vocEntity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -22,7 +22,7 @@ import static ru.integration.util.Methods.checkCode;
 
 @Entity
 @Table(name = "medStaffFactById", schema = "public", catalog = "integration")
-public class MedStaffFactByIdEntity {
+public class MedStaffFactById {
 
     private Integer id;
     private Long LpuSection_id;
@@ -222,19 +222,19 @@ public class MedStaffFactByIdEntity {
     MedStaffFactOuter_id	null*/
 
 
-    public List<MedStaffFactByIdEntity> parseJSON(String json, String medStaffFact_id) {
+    public List<MedStaffFactById> parseJSON(String json, String medStaffFact_id) {
 
         JsonParser parser = new JsonParser();
         JsonObject jparse = parser.parse(json).getAsJsonObject();
 
         if (Methods.checkCode(jparse)) {
-            List<MedStaffFactByIdEntity> medStaffFactByIdEntities = new ArrayList<>();
+            List<MedStaffFactById> medStaffFactByIdEntities = new ArrayList<>();
             JsonArray data = jparse.getAsJsonArray("data");
             for (JsonElement medspecs : data) {
 
                 try {
                     JsonObject sect = medspecs.getAsJsonObject();
-                    MedStaffFactByIdEntity medStaffFactById = new MedStaffFactByIdEntity();
+                    MedStaffFactById medStaffFactById = new MedStaffFactById();
 
                     medStaffFactById.setLpuSection_id(Long.valueOf(Methods.checkJsonObjGetInteger(sect, "LpuSection_id")));
                     medStaffFactById.setMedPersonal_id(Integer.valueOf(Methods.checkJsonObjGetInteger(sect, "MedPersonal_id")));

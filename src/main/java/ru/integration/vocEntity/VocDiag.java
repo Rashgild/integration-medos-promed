@@ -1,4 +1,4 @@
-package ru.integration.vocentities;
+package ru.integration.vocEntity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -21,7 +21,7 @@ import static ru.integration.util.Methods.checkCode;
 
 @Entity
 @Table(name = "vocdiag", schema = "public", catalog = "integration")
-public class VocDiagEntity {
+public class VocDiag {
     private Integer id;
     private Integer promedId;
     private String name;
@@ -79,19 +79,19 @@ public class VocDiagEntity {
         this.isSync = isSync;
     }
 
-    public List<VocDiagEntity> parseJSON(String json) {
+    public List<VocDiag> parseJSON(String json) {
 
         JsonParser parser = new JsonParser();
         JsonObject jparse = parser.parse(json).getAsJsonObject();
 
         if (Methods.checkCode(jparse)) {
-            List<VocDiagEntity> diagEntities = new ArrayList<>();
+            List<VocDiag> diagEntities = new ArrayList<>();
             JsonArray data = jparse.getAsJsonArray("data");
             for (JsonElement medspecs : data) {
 
                 try {
                     JsonObject sect = medspecs.getAsJsonObject();
-                    VocDiagEntity diagEntity = new VocDiagEntity();
+                    VocDiag diagEntity = new VocDiag();
 
                     diagEntity.setName((Methods.checkJsonObj(sect, "Name")));
                     diagEntity.setPromedId((Methods.checkJsonObjGetInteger(sect, "id")));

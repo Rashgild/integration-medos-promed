@@ -16,15 +16,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import ru.integration.dao.DaoImpl;
 import ru.integration.entities.EvnPLBaseEntity;
+import ru.integration.entities.EvnVizitPLEntity;
 import ru.integration.entities.medosEntities.*;
 import ru.integration.util.Methods;
-import ru.integration.dao.DaoImpl;
-import ru.integration.entities.EvnVizitPLEntity;
-import ru.rashgild.integration.entities.medosEntities.*;
 
 import static ru.integration.api.Person.getPerson;
-import static ru.integration.util.Methods.checkCode;
 
 
 @Path("/Policlinic")
@@ -147,7 +145,7 @@ public class Policlinic {
                 //MedosMedcaseEntity serv = (MedosMedcaseEntity) new DaoImpl().getEntityM("MedosMedcaseEntity", "parent_id=" + policlinicCase.getId() + " and dtype='ServiceMedCase'");
 
                 /*if (serv != null && serv.getId() != null && serv.getId() != 0) {
-                    MedosMedserviceEntity ms = (MedosMedserviceEntity) new DaoImpl().getEntityM("MedosMedserviceEntity", "id=" + serv.getMedservice_id());
+                    MedosMedservice ms = (MedosMedservice) new DaoImpl().getEntityM("MedosMedservice", "id=" + serv.getMedservice_id());
                     firstVis.put("UslugaComplex_uid", ms.getPromedCode());
                 }*/
 
@@ -204,7 +202,6 @@ public class Policlinic {
                     , ""
                     , jparse.get("birthday").getAsString()
                     , jparse.get("snils").getAsString()));
-            //System.out.println("try1)personId>>"+personId);
 
             if (personId == 0) {
                 personId = parsePesoinIdJSON(getPerson(jparse.get("lastname").getAsString()
@@ -212,7 +209,6 @@ public class Policlinic {
                         , jparse.get("middlename").getAsString()
                         , jparse.get("birthday").getAsString()
                         , ""));
-                //System.out.println("try2)personId>>"+personId);
             }
 
 
@@ -334,7 +330,6 @@ public class Policlinic {
             for (JsonElement medspecs : data) {
                 JsonObject sect = medspecs.getAsJsonObject();
                 personId = Methods.checkJsonObjGetInteger(sect, "Person_id");
-                //System.out.println(personId);
             }
             return personId;
         } else return 0;
@@ -348,7 +343,6 @@ public class Policlinic {
         List<EvnPLBaseEntity> evns = (List<EvnPLBaseEntity>) new DaoImpl<>()
                 .getAllE("EvnPLBaseEntity", " (isExport=false or isExport is null) and error = false and promedperson_id!='0' " +
                         "and evn_setdt like ('%" + date + "%')");
-
 
         if (countS == null || countS.equals("")) {
             countS = String.valueOf(evns.size());
@@ -446,7 +440,8 @@ public class Policlinic {
     @Path("/syncMedos")
     @Produces("application/json;charset=UTF-8")
     public static String syncMedos() {
-        List<EvnPLBaseEntity> evns = (List<EvnPLBaseEntity>) new DaoImpl<>().getAllE("EvnPLBaseEntity", " isExport=true and issynced=false");
+        List<EvnPLBaseEntity> evns
+                = (List<EvnPLBaseEntity>) new DaoImpl<>().getAllE("EvnPLBaseEntity", " isExport=true and issynced=false");
         int count = evns.size();
         int i = 1;
         for (EvnPLBaseEntity evn : evns) {

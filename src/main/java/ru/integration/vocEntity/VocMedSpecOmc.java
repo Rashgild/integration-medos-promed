@@ -1,25 +1,27 @@
-package ru.integration.vocentities;
+package ru.integration.vocEntity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
 import ru.integration.util.Methods;
 
+import static ru.integration.util.Methods.checkCode;
+
+
 @Entity
-@Table(name = "vocuslugacomplex", schema = "public", catalog = "integration")
-public class VocUslugaComplexEntity {
+@Table(name = "vocMedSpecOmc", schema = "public", catalog = "integration")
+public class VocMedSpecOmc {
 
     private Integer id;
-    private Integer promedId;
+    private String promedId;
     private String name;
     private String code;
-    private String isSync;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,11 +36,11 @@ public class VocUslugaComplexEntity {
 
     @Basic
     @Column(name = "promedId")
-    public Integer getPromedId() {
+    public String getPromedId() {
         return promedId;
     }
 
-    public void setPromedId(Integer promedId) {
+    public void setPromedId(String promedId) {
         this.promedId = promedId;
     }
 
@@ -62,40 +64,34 @@ public class VocUslugaComplexEntity {
         this.code = code;
     }
 
-    @Basic
-    @Column(name = "isSync")
-    public String getIsSync() {
-        return isSync;
-    }
-
-    public void setIsSync(String isSync) {
-        this.isSync = isSync;
-    }
-
-    public List<VocUslugaComplexEntity> parseJSON(String json) {
+    public List<VocMedSpecOmc> parseJSON(String json) {
 
         JsonParser parser = new JsonParser();
         JsonObject jparse = parser.parse(json).getAsJsonObject();
 
         if (Methods.checkCode(jparse)) {
-            List<VocUslugaComplexEntity> uslugaComplexEntities = new ArrayList<>();
+            List<VocMedSpecOmc> vocMedSpecOmcMOS = new ArrayList<>();
             JsonArray data = jparse.getAsJsonArray("data");
             for (JsonElement medspecs : data) {
-
                 try {
-                    JsonObject sect = medspecs.getAsJsonObject();
-                    VocUslugaComplexEntity uslugaComplexEntity = new VocUslugaComplexEntity();
-
-                    uslugaComplexEntity.setName((Methods.checkJsonObj(sect, "Name")));
-                    uslugaComplexEntity.setPromedId((Methods.checkJsonObjGetInteger(sect, "id")));
-                    uslugaComplexEntity.setCode((Methods.checkJsonObj(sect, "Code")));
-
-                    uslugaComplexEntities.add(uslugaComplexEntity);
+                    JsonObject medcpec = medspecs.getAsJsonObject();
+                    VocMedSpecOmc vocMedSpecOmcMO = new VocMedSpecOmc();
+                    if (!medcpec.get("id").toString().equals("null")) {
+                        vocMedSpecOmcMO.setPromedId(medcpec.get("id").getAsString());
+                    }
+                    if (!medcpec.get("Name").toString().equals("null")) {
+                        vocMedSpecOmcMO.setName(medcpec.get("Name").getAsString());
+                    }
+                    if (!medcpec.get("Code").toString().equals("null")) {
+                        vocMedSpecOmcMO.setCode(medcpec.get("Code").getAsString());
+                    }
+                    vocMedSpecOmcMOS.add(vocMedSpecOmcMO);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-            return uslugaComplexEntities;
+            return vocMedSpecOmcMOS;
         } else return null;
     }
+
 }

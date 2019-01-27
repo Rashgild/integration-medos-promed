@@ -24,7 +24,7 @@ import ru.integration.entities.schedule.BusyTimeEntity;
 import ru.integration.entities.schedule.ListBusyDateTimeEntity;
 import ru.integration.entities.schedule.MedosWorkcalendardayEntity;
 import ru.integration.entities.schedule.MedosWorkcalendartimeEntity;
-import ru.integration.vocentities.VocMedStaffFactMO;
+import ru.integration.vocEntity.VocMedStaffFactMO;
 
 import static ru.integration.api.Person.getPersonById;
 import static ru.integration.util.Methods.calcTime;

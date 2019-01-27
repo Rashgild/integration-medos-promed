@@ -27,6 +27,6 @@
         <mapping class="ru.integration.entities.medosEntities.MedosWorkfunctionEntity"/>
         <mapping class="ru.integration.entities.medosEntities.MedosVocworkfunctionEntity"/>
 
-        <mapping class="ru.integration.vocentities.MedosMedserviceEntity"/>
+        <mapping class="ru.integration.vocEntity.MedosMedservice"/>
     </session-factory>
 </hibernate-configuration>

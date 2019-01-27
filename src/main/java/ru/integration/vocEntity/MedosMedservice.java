@@ -1,4 +1,4 @@
-package ru.integration.vocentities;
+package ru.integration.vocEntity;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "medservice", schema = "sqluser", catalog = "riams")
-public class MedosMedserviceEntity {
+public class MedosMedservice {
 
     private Long id;
     private String name;

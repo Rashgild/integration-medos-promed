@@ -7,15 +7,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 
-import ru.integration.util.GlobalVariables;
 import ru.integration.dao.DaoImpl;
 import ru.integration.entities.PersonEntity;
 import ru.integration.entities.medosEntities.MedosVocidc10Entity;
 import ru.integration.entities.schedule.FreeDateEntity;
 import ru.integration.entities.schedule.FreeTimeEntity;
 import ru.integration.entities.schedule.MedWorkerEntity;
-import ru.integration.vocentities.*;
-import ru.rashgild.integration.vocentities.*;
+import ru.integration.util.GlobalVariables;
+import ru.integration.vocEntity.*;
 
 import static ru.integration.api.Person.getPersonById;
 import static ru.integration.util.Methods.creteGetRequest;
@@ -28,7 +27,6 @@ public class VocOperations {
     @Path("/medSpecOmsByMOSync")
     @Produces("application/json;charset=UTF-8")
     public static String sync() {
-
         HashMap<String, String> params = new HashMap<>();
         params.put("lpu_id", GlobalVariables.lpu_id);
         String json = creteGetRequest("api/MedSpecOms/MedSpecOmsByMO", params);
@@ -43,10 +41,7 @@ public class VocOperations {
         String json = syncVocRefbook("dbo.MedSpecOms");
         new DaoImpl().saveList(new VocMedSpecOmc().parseJSON(json));
         return json;
-        /*select *  from vocmedspecomcmo vmo
-        left join vocmedspecomc vm on vm.promedid = vmo.medspecomc_id*/
     }
-
 
     @GET
     @Path("/medStaffFactByMOSync")
@@ -65,7 +60,6 @@ public class VocOperations {
         }
         return "jsonend";
     }
-
 
     @GET
     @Path("/lpuSectionListByMO")
@@ -89,13 +83,10 @@ public class VocOperations {
         return json;
     }
 
-
     @GET
     @Path("/medStaffFactListByMOandProfileSync")
     @Produces("application/json;charset=UTF-8")
     public static String medStaffFactListByMOandProfile() {
-
-        //medSpecOmsByMOSync
         List<VocLpuSectionById> vocLpuSectionProfiles = (List<VocLpuSectionById>) new DaoImpl<>().getAllE("VocLpuSectionById");
         for (VocLpuSectionById v : vocLpuSectionProfiles) {
             HashMap<String, String> params = new HashMap<>();
@@ -103,7 +94,7 @@ public class VocOperations {
             params.put("LpuSectionProfile_id", String.valueOf(v.getLpuSectionProfile_id()));
             String json = creteGetRequest("api/medstafffact/MedStaffFactListByMOandProfile", params);
             System.out.println(json);
-            new DaoImpl().saveList(new VocMedStaffFactListEntity().parseJSON(json, String.valueOf(v.getLpuSectionProfile_id())));
+            new DaoImpl().saveList(new VocMedStaffFactList().parseJSON(json, String.valueOf(v.getLpuSectionProfile_id())));
         }
         return "jsonend";
     }
@@ -152,13 +143,6 @@ public class VocOperations {
         return "{\"jsonend\":\"ok\"}";
     }
 
-
-    /**-------------------------------------------------------------------------------------------------------------------**/
-    /**-------------------------------------------------------------------------------------------------------------------**/
-    /**
-     * -------------------------------------------------------------------------------------------------------------------
-     **/
-
     @GET
     @Path("/getLpuSectionById")
     @Produces("application/json;charset=UTF-8")
@@ -180,14 +164,14 @@ public class VocOperations {
     @Produces("application/json;charset=UTF-8")
     public static String getMedStaffFactById() {
 
-        List<VocMedStaffFactListEntity> medStaffFactListEntity = (List<VocMedStaffFactListEntity>) new DaoImpl<>().getAllE("VocMedStaffFactListEntity");
+        List<VocMedStaffFactList> medStaffFactListEntity = (List<VocMedStaffFactList>) new DaoImpl<>().getAllE("VocMedStaffFactList");
 
-        for (VocMedStaffFactListEntity v : medStaffFactListEntity) {
+        for (VocMedStaffFactList v : medStaffFactListEntity) {
             HashMap<String, String> params = new HashMap<>();
             params.put("MedStaffFact_id", String.valueOf(v.getMedStaffFact_id()));
             String json = creteGetRequest("api/MedStaffFact/MedStaffFactById", params);
             System.out.println(json);
-            new DaoImpl().saveList(new MedStaffFactByIdEntity().parseJSON(json, v.getMedStaffFact_id()));
+            new DaoImpl().saveList(new MedStaffFactById().parseJSON(json, v.getMedStaffFact_id()));
         }
         return "{\"jsonend\":\"ok\"}";
     }
@@ -197,10 +181,10 @@ public class VocOperations {
     @Produces("application/json;charset=UTF-8")
     public static String getPersonbyMedstaff() {
 
-        List<MedStaffFactByIdEntity> medStaffFactListEntity = (List<MedStaffFactByIdEntity>)
-                new DaoImpl<>().getAllE("MedStaffFactByIdEntity");
+        List<MedStaffFactById> medStaffFactListEntity = (List<MedStaffFactById>)
+                new DaoImpl<>().getAllE("MedStaffFactById");
 
-        for (MedStaffFactByIdEntity v : medStaffFactListEntity) {
+        for (MedStaffFactById v : medStaffFactListEntity) {
 
             HashMap<String, String> params = new HashMap<>();
             params.put("MedWorker_id", String.valueOf(v.getMedPersonal_id()));
@@ -216,10 +200,6 @@ public class VocOperations {
         return "{\"jsonend\":\"ok\"}";
     }
 
-
-    /**
-     * Получить работника по id персоны
-     */
     @GET
     @Path("/getMedworker")
     @Produces("application/json;charset=UTF-8")
@@ -231,9 +211,6 @@ public class VocOperations {
 
     }
 
-    /**
-     * Получить работника по id работника
-     */
     @GET
     @Path("/getMedworkerById")
     @Produces("application/json;charset=UTF-8")
@@ -244,13 +221,6 @@ public class VocOperations {
         return creteGetRequest("api/MedWorkerById", params);
 
     }
-
-
-    /**-------------------------------------------------------------------------------------------------------------------**/
-    /**-------------------------------------------------------------------------------------------------------------------**/
-    /**
-     * -------------------------------------------------------------------------------------------------------------------
-     **/
 
     @GET
     @Path("/syncVocRefbook")
@@ -265,7 +235,7 @@ public class VocOperations {
     @Path("/getDiag")
     public static String getDiag() {
 
-        new DaoImpl().saveList(new VocDiagEntity().parseJSON(syncVocRefbook("dbo.Diag")));
+        new DaoImpl().saveList(new VocDiag().parseJSON(syncVocRefbook("dbo.Diag")));
         return "{'ok':'0'}";
     }
 
@@ -273,10 +243,10 @@ public class VocOperations {
     @Path("/syncDiag")
     public static String syncDiag() {
 
-        List<VocDiagEntity> diagEntities = new DaoImpl().getEntityList("VocDiagEntity", " issync is null");
+        List<VocDiag> diagEntities = new DaoImpl().getEntityList("VocDiag", " issync is null");
         List<MedosVocidc10Entity> medosVocidc10Entities = new DaoImpl().getMedosEntityList("MedosVocidc10Entity");
 
-        for (VocDiagEntity d : diagEntities) {
+        for (VocDiag d : diagEntities) {
             for (MedosVocidc10Entity d2 : medosVocidc10Entities) {
 
                 if (d2.getCode().equals(d.getCode())) {
@@ -286,7 +256,7 @@ public class VocOperations {
 
                     params = new HashMap<>();
                     params.put("issync", "'true'");
-                    new DaoImpl().updateRecord("VocDiagEntity", params, " where id=" + d.getId());
+                    new DaoImpl().updateRecord("VocDiag", params, " where id=" + d.getId());
                 }
             }
         }
@@ -296,30 +266,27 @@ public class VocOperations {
     @GET
     @Path("/getUsluga")
     public static String getUsluga() {
-
-
-        new DaoImpl().saveList(new VocUslugaComplexEntity().parseJSON(syncVocRefbook("dbo.UslugaComplex")));
+        new DaoImpl().saveList(new VocUslugaComplex().parseJSON(syncVocRefbook("dbo.UslugaComplex")));
         return "{'ok':'0'}";
     }
 
     @GET
     @Path("/syncUsluga")
     public static String syncUsluga() {
+        List<VocUslugaComplex> uslugaComplexEntities = new DaoImpl().getEntityList("VocUslugaComplex", " issync is null");
+        List<MedosMedservice> medosMedserviceEntities = new DaoImpl().getMedosEntityList("MedosMedservice");
 
-        List<VocUslugaComplexEntity> uslugaComplexEntities = new DaoImpl().getEntityList("VocUslugaComplexEntity", " issync is null");
-        List<MedosMedserviceEntity> medosMedserviceEntities = new DaoImpl().getMedosEntityList("MedosMedserviceEntity");
-
-        for (VocUslugaComplexEntity d : uslugaComplexEntities) {
-            for (MedosMedserviceEntity d2 : medosMedserviceEntities) {
+        for (VocUslugaComplex d : uslugaComplexEntities) {
+            for (MedosMedservice d2 : medosMedserviceEntities) {
 
                 if (d2.getCode().equals(d.getCode())) {
                     HashMap<String, String> params = new HashMap<>();
                     params.put("promedcode", "\'" + d.getPromedId() + "\'");
-                    new DaoImpl().updateRecordM("MedosMedserviceEntity", params, " where id=" + d2.getId());
+                    new DaoImpl().updateRecordM("MedosMedservice", params, " where id=" + d2.getId());
 
                     params = new HashMap<>();
                     params.put("issync", "'true'");
-                    new DaoImpl().updateRecord("VocUslugaComplexEntity", params, " where id=" + d.getId());
+                    new DaoImpl().updateRecord("VocUslugaComplex", params, " where id=" + d.getId());
                 }
             }
         }

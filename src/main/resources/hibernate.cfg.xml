@@ -25,15 +25,15 @@
         <mapping class="ru.integration.entities.schedule.BusyDateEntity"/>
         <mapping class="ru.integration.entities.schedule.MedWorkerEntity"/>
 
-        <mapping class="ru.integration.vocentities.VocMedSpecOmc"/>
-        <mapping class="ru.integration.vocentities.VocMedSpecOmcMO"/>
-        <mapping class="ru.integration.vocentities.VocMedStaffFactMO"/>
-        <mapping class="ru.integration.vocentities.VocLpuSection"/>
-        <mapping class="ru.integration.vocentities.VocLpuSectionProfile"/>
-        <mapping class="ru.integration.vocentities.VocLpuSectionById"/>
-        <mapping class="ru.integration.vocentities.VocMedStaffFactListEntity"/>
-        <mapping class="ru.integration.vocentities.MedStaffFactByIdEntity"/>
-        <mapping class="ru.integration.vocentities.VocDiagEntity"/>
-        <mapping class="ru.integration.vocentities.VocUslugaComplexEntity"/>
+        <mapping class="ru.integration.vocEntity.VocMedSpecOmc"/>
+        <mapping class="ru.integration.vocEntity.VocMedSpecOmcMO"/>
+        <mapping class="ru.integration.vocEntity.VocMedStaffFactMO"/>
+        <mapping class="ru.integration.vocEntity.VocLpuSection"/>
+        <mapping class="ru.integration.vocEntity.VocLpuSectionProfile"/>
+        <mapping class="ru.integration.vocEntity.VocLpuSectionById"/>
+        <mapping class="ru.integration.vocEntity.VocMedStaffFactList"/>
+        <mapping class="ru.integration.vocEntity.MedStaffFactById"/>
+        <mapping class="ru.integration.vocEntity.VocDiag"/>
+        <mapping class="ru.integration.vocEntity.VocUslugaComplex"/>
     </session-factory>
 </hibernate-configuration>

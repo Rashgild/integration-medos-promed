@@ -1,4 +1,4 @@
-package ru.integration.vocentities;
+package ru.integration.vocEntity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -16,7 +16,7 @@ import static ru.integration.util.Methods.checkCode;
 
 @Entity
 @Table(name = "medStaffFactList", schema = "public", catalog = "integration")
-public class VocMedStaffFactListEntity {
+public class VocMedStaffFactList {
 
     private Integer id;
     private String medStaffFact_id;
@@ -54,18 +54,18 @@ public class VocMedStaffFactListEntity {
         this.lpuProfile_code = lpuProfile_code;
     }
 
-    public List<VocMedStaffFactListEntity> parseJSON(String json, String lpuProfile) {
+    public List<VocMedStaffFactList> parseJSON(String json, String lpuProfile) {
 
         JsonParser parser = new JsonParser();
         JsonObject jparse = parser.parse(json).getAsJsonObject();
 
         if (Methods.checkCode(jparse)) {
-            List<VocMedStaffFactListEntity> medStaffFactListEntities = new ArrayList<>();
+            List<VocMedStaffFactList> medStaffFactListEntities = new ArrayList<>();
             JsonArray data = jparse.getAsJsonArray("data");
             for (JsonElement medspecs : data) {
                 try {
                     JsonObject sect = medspecs.getAsJsonObject();
-                    VocMedStaffFactListEntity vocMedStaffFactListEntity = new VocMedStaffFactListEntity();
+                    VocMedStaffFactList vocMedStaffFactListEntity = new VocMedStaffFactList();
                     vocMedStaffFactListEntity.setMedStaffFact_id(Methods.checkJsonObj(sect, "MedStaffFact_id"));
                     vocMedStaffFactListEntity.setLpuProfile_code(lpuProfile);
 

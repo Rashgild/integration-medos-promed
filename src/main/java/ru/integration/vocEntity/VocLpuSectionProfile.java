@@ -1,4 +1,4 @@
-package ru.integration.vocentities;
+package ru.integration.vocEntity;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
