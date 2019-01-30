@@ -17,10 +17,8 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import ru.integration.entities.AuthEntity;
-import ru.integration.api.Auth;
+import ru.integration.model.Auth;
 
-import static ru.integration.api.Auth.login;
 
 
 public class Methods {
@@ -107,11 +105,11 @@ public class Methods {
     }
 
     public static void checkCode() {
-        AuthEntity auth = Auth.getAuthKey();
+        Auth auth = null;// ru.integration.deprecated.api.Auth.getAuthKey();
         if (auth != null) {
-            GlobalVariables.sessionId = auth.getPHPSESSID();
+            GlobalVariables.sessionId = auth.getPhpSessId();
         } else {
-            GlobalVariables.sessionId = login();
+            GlobalVariables.sessionId = null;//login();
         }
     }
 
