@@ -20,6 +20,10 @@ import org.codehaus.jackson.annotate.JsonProperty;
 @Table(name = "auth")
 public class Auth {
 
+    public Auth() {
+        this.expire = false;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -32,7 +36,7 @@ public class Auth {
 
     @Basic
     @Column(name = "isExpire")
-    private Boolean expire = false;
+    private Boolean expire;
 
 
     public Integer getId() {

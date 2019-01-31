@@ -5,25 +5,26 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import javax.annotation.PostConstruct;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.boot.MetadataSources;
-import org.hibernate.boot.registry.StandardServiceRegistry;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 abstract class AbstractDao {
 
     private SessionFactory sessionFactory = buildSessionFactory();
 
-    private Session getSession() {
-        return sessionFactory.getCurrentSession();
-    }
-
     protected Client client;
+
+    @Autowired
+    protected Environment environment;
 
     @PostConstruct
     public void init() {
@@ -32,18 +33,26 @@ abstract class AbstractDao {
         client = Client.create(clientConfig);
     }
 
-    private SessionFactory buildSessionFactory() {
-        /*final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-                .configure()
-                .build();
-        try {
-            sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
-        } catch (Exception e) {
-            StandardServiceRegistryBuilder.destroy(registry);
-            throw new ExceptionInInitializerError("Initial SessionFactory failed" + e);
-        }
-        return sessionFactory;*/
+    Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
 
+    protected Connection getConnection() {
+        Connection connection = null;
+        String url = environment.getRequiredProperty("jdbc.url");
+        String name = environment.getRequiredProperty("jdbc.username");
+        String password = environment.getRequiredProperty("jdbc.password");
+
+        try {
+            Class.forName(environment.getRequiredProperty("jdbc.driverClassName"));
+            connection = DriverManager.getConnection(url, name, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("sql exception");
+        }
+        return connection;
+    }
+
+    private SessionFactory buildSessionFactory() {
         if (sessionFactory != null) {
             return sessionFactory;
         }
@@ -74,7 +83,7 @@ abstract class AbstractDao {
         trans.commit();
     }
 
-    public void shutdown() {
+    protected void shutdown() {
         getSession().close();
     }
 }
