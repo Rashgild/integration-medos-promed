@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ru.integration.dao.BusyDateTimeDao;
 import ru.integration.model.schedule.BusyDateTime;
+import ru.integration.model.schedule.BusyDateTimeList;
 
 @Service("BusyDateTimeService")
 @Transactional
@@ -21,12 +22,12 @@ public class BusyDateTimeServiceImpl implements BusyDateTimeService {
     @Override
     public List<BusyDateTime> getBusyDateTimeFromPromed(String dateBegin, String dateEnd) {
         ClientResponse response = dateTimeDao.getBusyDateTimeFromPromed(dateBegin, dateBegin);
-        return response.getEntity(BusyDateTime.BusyDateTimeList.class).getBusyDateTimeList();
+        return response.getEntity(BusyDateTimeList.class).getBusyDateTimeList();
     }
 
     @Override
-    public BusyDateTime.BusyDateTimeList getBusyDateTimeListFromPromed(String dateBegin, String dateEnd) {
+    public BusyDateTimeList getBusyDateTimeListFromPromed(String dateBegin, String dateEnd) {
         ClientResponse response = dateTimeDao.getBusyDateTimeFromPromed(dateBegin, dateBegin);
-        return response.getEntity(BusyDateTime.BusyDateTimeList.class);
+        return response.getEntity(BusyDateTimeList.class);
     }
 }
