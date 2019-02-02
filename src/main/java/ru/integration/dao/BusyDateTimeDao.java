@@ -12,5 +12,7 @@ public interface BusyDateTimeDao {
 
     void save(BusyDateTime busyDateTime);
 
+    void saveList(BusyDateTime.BusyDateTimeList list);
+
     List<BusyDateTime> getNotSyncedListBusyDateTime();
 }

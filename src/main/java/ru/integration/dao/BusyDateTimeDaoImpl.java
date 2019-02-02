@@ -7,10 +7,11 @@ import javax.ws.rs.core.MediaType;
 
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import ru.integration.model.schedule.BusyDateTime;
-import ru.integration.util.GlobalVariables;
 
+@Repository("BusyDateTimeDao")
 public class BusyDateTimeDaoImpl extends AbstractDao implements BusyDateTimeDao {
 
     @Override
@@ -22,7 +23,7 @@ public class BusyDateTimeDaoImpl extends AbstractDao implements BusyDateTimeDao 
                 .queryParam("Lpu_id", environment.getProperty("lpu.id"))
                 .queryParam("TimeTableGraf_beg", timeBegin)
                 .queryParam("TimeTableGraf_end", timeEnd)
-                .header("Cookie", "PHPSESSID=" + GlobalVariables.sessionId)
+                .header("Cookie", "PHPSESSID=" + environment.getProperty("sessionId"))
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
     }
@@ -30,6 +31,11 @@ public class BusyDateTimeDaoImpl extends AbstractDao implements BusyDateTimeDao 
     @Override
     public void save(BusyDateTime busyDateTime) {
         persist(busyDateTime);
+    }
+
+    @Override
+    public void saveList(BusyDateTime.BusyDateTimeList list) {
+        persist(list);
     }
 
     @Override

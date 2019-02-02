@@ -1,26 +1,30 @@
 package ru.integration.model.schedule;
 
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.codehaus.jackson.annotate.JsonProperty;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
 @Entity
 @Table(name = "BusyDateTime")
 public class BusyDateTime {
-
-    public BusyDateTime() {
-        this.sync = false;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,6 +44,10 @@ public class BusyDateTime {
     @Basic
     @Column(name = "sync")
     private Boolean sync;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "journal_id")
+    private BusyDateTimeList list;
 
     public Integer getId() {
         return id;
@@ -71,5 +79,27 @@ public class BusyDateTime {
 
     public void setSync(Boolean sync) {
         this.sync = sync;
+    }
+
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class BusyDateTimeList {
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Column(name = "id", nullable = false)
+        private Integer id;
+
+        @JsonProperty("data")
+        @LazyCollection(LazyCollectionOption.FALSE)
+        @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}, mappedBy = "journal")
+        private List<BusyDateTime> busyDateTimeList;
+
+        public List<BusyDateTime> getBusyDateTimeList() {
+            return busyDateTimeList;
+        }
+
+        public void setBusyDateTimeList(List<BusyDateTime> busyDateTimeList) {
+            this.busyDateTimeList = busyDateTimeList;
+        }
     }
 }
