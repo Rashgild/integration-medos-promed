@@ -1,5 +1,9 @@
 package ru.integration.model.schedule;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,9 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import org.codehaus.jackson.annotate.JsonIgnoreProperties;
-import org.codehaus.jackson.annotate.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
@@ -35,7 +36,7 @@ public class BusyDateTime {
 
     @Basic
     @Column(name = "sync")
-    private Boolean sync=false;
+    private Boolean sync = false;
 
     public Integer getId() {
         return id;
@@ -67,5 +68,20 @@ public class BusyDateTime {
 
     public void setSync(Boolean sync) {
         this.sync = sync;
+    }
+
+    @XmlRootElement
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public static class BusyDateTimeList {
+        @JsonProperty("data")
+        private List<BusyDateTime> busyDateTimeList;
+
+        public List<BusyDateTime> getBusyDateTimeList() {
+            return busyDateTimeList;
+        }
+
+        public void setBusyDateTimeList(List<BusyDateTime> busyDateTimeList) {
+            this.busyDateTimeList = busyDateTimeList;
+        }
     }
 }

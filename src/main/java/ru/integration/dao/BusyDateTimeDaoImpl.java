@@ -10,7 +10,6 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import ru.integration.model.schedule.BusyDateTime;
-import ru.integration.model.schedule.BusyDateTimeList;
 
 @Repository("BusyDateTimeDao")
 public class BusyDateTimeDaoImpl extends AbstractDao implements BusyDateTimeDao {
@@ -32,13 +31,6 @@ public class BusyDateTimeDaoImpl extends AbstractDao implements BusyDateTimeDao 
     @Override
     public void save(BusyDateTime busyDateTime) {
         persist(busyDateTime);
-    }
-
-    @Override
-    public void saveList(List<BusyDateTime> list) {
-       for (BusyDateTime busyDateTime: list){
-           persist(busyDateTime);
-       }
     }
 
     @Override
