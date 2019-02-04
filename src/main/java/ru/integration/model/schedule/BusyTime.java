@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement
-@JsonIgnoreProperties
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "BusyDateTime")
 public class BusyTime {
@@ -47,7 +47,6 @@ public class BusyTime {
     @Column(name = "begin_date_time")
     @JsonSerialize(using = LocalDateTimeSerializer.class )
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-   /* @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")*/
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime beginDateTime;
 

@@ -39,7 +39,6 @@ public class Auth {
     @Column(name = "isExpire")
     private Boolean expire;
 
-
     public Integer getId() {
         return id;
     }

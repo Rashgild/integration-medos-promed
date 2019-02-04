@@ -2,9 +2,11 @@ package ru.integration.dao;
 
 import com.sun.jersey.api.client.ClientResponse;
 
-import ru.integration.model.schedule.BusyDateTime;
+import ru.integration.model.schedule.BusyTime;
 
 public interface BusyTimeDao {
 
-    ClientResponse getBusyTimeFromPromed(BusyDateTime busyDateTime);
+    ClientResponse getBusyTimeByIdFromPromed(Integer timeId);
+
+    void save(BusyTime busyTime);
 }
