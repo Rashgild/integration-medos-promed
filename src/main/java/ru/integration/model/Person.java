@@ -244,6 +244,10 @@ public class Person {
     @XmlRootElement
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class PersonList {
+
+        @JsonProperty("error_code")
+        private Integer error;
+
         @JsonProperty("data")
         private List<Person> personList;
 
@@ -253,6 +257,14 @@ public class Person {
 
         public void setPersonList(List<Person> personList) {
             this.personList = personList;
+        }
+
+        public Integer getError() {
+            return error;
+        }
+
+        public void setError(Integer error) {
+            this.error = error;
         }
     }
 }

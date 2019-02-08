@@ -25,8 +25,8 @@ public class BusyDateTimeServiceImpl implements BusyDateTimeService {
     }
 
     @Override
-    public void saveListBusyDateTime(List<BusyDateTime> busyDateTimes){
-        for(BusyDateTime busyDateTime: busyDateTimes){
+    public void saveListBusyDateTime(List<BusyDateTime> busyDateTimes) {
+        for (BusyDateTime busyDateTime : busyDateTimes) {
             dateTimeDao.save(busyDateTime);
         }
     }

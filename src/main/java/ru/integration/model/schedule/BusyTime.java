@@ -127,6 +127,10 @@ public class BusyTime {
     @XmlRootElement
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class BusyTimeList {
+
+        @JsonProperty("error_code")
+        private Integer error;
+
         @JsonProperty("data")
         private List<BusyTime> busyTimes;
 
@@ -136,6 +140,14 @@ public class BusyTime {
 
         public void setBusyTimes(List<BusyTime> busyTimes) {
             this.busyTimes = busyTimes;
+        }
+
+        public Integer getError() {
+            return error;
+        }
+
+        public void setError(Integer error) {
+            this.error = error;
         }
     }
 }

@@ -1,9 +1,11 @@
 package ru.integration.service;
 
-import ru.integration.model.schedule.BusyDateTime;
+import ru.integration.model.schedule.BusyTime;
 
 public interface BusyTimeService {
 
-    void saveBusyTimeFromPromed(BusyDateTime busyDateTime);
+    BusyTime getBusyTimeFromPromed(Integer busyTimeId);
+
+    void saveBusyTime(BusyTime busyTimes);
 }
 

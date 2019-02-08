@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.integration.dao.BusyTimeDao;
-import ru.integration.model.schedule.BusyDateTime;
 import ru.integration.model.schedule.BusyTime;
 
 @Service("BusyTimeService")
@@ -20,12 +19,20 @@ public class BusyTimeServiceImpl implements BusyTimeService {
     private BusyTimeDao dao;
 
     @Override
-    public void saveBusyTimeFromPromed(BusyDateTime busyDateTime) {
-        ClientResponse response = dao.getBusyTimeByIdFromPromed(busyDateTime.getTimeId());
-        List<BusyTime> busyTimes = response.getEntity(BusyTime.BusyTimeList.class).getBusyTimes();
-        for (BusyTime busyTime : busyTimes) {
-            busyTime.setPromedId(busyDateTime.getTimeId());
-            dao.save(busyTime);
+    public BusyTime getBusyTimeFromPromed(Integer busyTimeId) {
+        ClientResponse response = dao.getBusyTimeByIdFromPromed(busyTimeId);
+
+        BusyTime.BusyTimeList busyTimeList = response.getEntity(BusyTime.BusyTimeList.class);
+        if (busyTimeList.getError().equals(0)) {
+            BusyTime busyTime = busyTimeList.getBusyTimes().get(0);
+            busyTime.setPromedId(busyTimeId);
+            return busyTime;
         }
+        return null;
+    }
+
+    @Override
+    public void saveBusyTime(BusyTime busyTimes) {
+        dao.save(busyTimes);
     }
 }
