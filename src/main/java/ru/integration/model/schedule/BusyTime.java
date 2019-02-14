@@ -18,14 +18,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
-
-
-@XmlRootElement
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
-@Table(name = "BusyDateTime")
+@Table(name = "BusyTime")
 public class BusyTime {
 
     @Id
@@ -45,7 +41,7 @@ public class BusyTime {
     @Basic
     @JsonProperty("TimeTableGraf_begTime")
     @Column(name = "begin_date_time")
-    @JsonSerialize(using = LocalDateTimeSerializer.class )
+    @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime beginDateTime;
@@ -124,7 +120,6 @@ public class BusyTime {
         isAddition = addition;
     }
 
-    @XmlRootElement
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class BusyTimeList {
 

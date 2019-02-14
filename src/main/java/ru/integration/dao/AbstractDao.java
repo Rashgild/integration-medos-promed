@@ -44,7 +44,7 @@ abstract class AbstractDao {
         String password = environment.getRequiredProperty("jdbc.password");
 
         try {
-            Class.forName(environment.getRequiredProperty("jdbc.driverClassName"));
+            Class.forName("org.postgresql.Driver");
             connection = DriverManager.getConnection(url, name, password);
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("sql exception");

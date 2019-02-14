@@ -34,8 +34,8 @@ public class Person {
     private Integer misId;
 
     @Basic
-    @Column(name = "Person_id")
-    private Integer promedPersonId;
+    @Column(name = "person_id") //promed_id
+    private Integer personId;
 
     @Basic
     @Column(name = "lastname")
@@ -120,12 +120,12 @@ public class Person {
         this.misId = misId;
     }
 
-    public Integer getPromedPersonId() {
-        return promedPersonId;
+    public Integer getPersonId() {
+        return personId;
     }
 
-    public void setPromedPersonId(Integer promedPersonId) {
-        this.promedPersonId = promedPersonId;
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     public String getLastname() {

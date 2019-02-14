@@ -17,11 +17,14 @@ public class PersonServiceImpl implements PersonService {
     private PersonDao dao;
 
     @Override
-    public Person getPersonFromPromed(Integer id) {
-        ClientResponse response = dao.getPersonByIdFormPromed(id);
+    public Person getPersonFromPromed(Integer personId) {
+        ClientResponse response = dao.getPersonByIdFormPromed(personId);
         Person.PersonList persons = response.getEntity(Person.PersonList.class);
+
         if (persons.getError().equals(0)) {
-            return persons.getPersonList().get(0);
+            Person person = persons.getPersonList().get(0);
+            person.setPersonId(personId);
+            return person;
         }
         return null;
     }
