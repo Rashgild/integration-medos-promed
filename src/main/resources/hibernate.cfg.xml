@@ -5,35 +5,45 @@
 <hibernate-configuration>
     <session-factory>
         <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.url">jdbc:postgresql://host:port/database</property>
-        <property name="connection.password">password</property>
-        <property name="connection.username">username</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/promed</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
+        <property name="connection.username">postgres</property>
+        <property name="connection.password">123456</property>
         <property name="connection.pool_size">50</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
+        <property name="hibernate.jdbc.lob.non_contextual_creation">true</property>
 
-        <mapping class="ru.integration.entities.PersonEntity"/>
-        <mapping class="ru.integration.entities.PolisEntity"/>
-        <mapping class="ru.integration.entities.DocumentEntity"/>
-        <mapping class="ru.integration.entities.EvnPLBaseEntity"/>
-        <mapping class="ru.integration.entities.EvnVizitPLEntity"/>
-        <mapping class="ru.integration.entities.AuthEntity"/>
+        <mapping class="ru.integration.model.Auth"/>
+        <mapping class="ru.integration.model.Person"/>
+        <mapping class="ru.integration.model.MedStaff"/>
+        <mapping class="ru.integration.model.MedWorker"/>
+        <mapping class="ru.integration.model.schedule.BusyDateTime"/>
+        <mapping class="ru.integration.model.schedule.BusyTime"/>
 
-        <mapping class="ru.integration.entities.schedule.FreeDateEntity"/>
-        <mapping class="ru.integration.entities.schedule.FreeTimeEntity"/>
-        <mapping class="ru.integration.entities.schedule.ListBusyDateTimeEntity"/>
-        <mapping class="ru.integration.entities.schedule.BusyTimeEntity"/>
-        <mapping class="ru.integration.entities.schedule.BusyDateEntity"/>
-        <mapping class="ru.integration.entities.schedule.MedWorkerEntity"/>
+        <!-- <mapping class="ru.integration.deprecated.entities.PersonEntity"/>
+         <mapping class="ru.integration.deprecated.entities.PolisEntity"/>
+         <mapping class="ru.integration.deprecated.entities.DocumentEntity"/>
+         <mapping class="ru.integration.deprecated.entities.EvnPLBaseEntity"/>
+         <mapping class="ru.integration.deprecated.entities.EvnVizitPLEntity"/>
 
-        <mapping class="ru.integration.vocEntity.VocMedSpecOmc"/>
-        <mapping class="ru.integration.vocEntity.VocMedSpecOmcMO"/>
-        <mapping class="ru.integration.vocEntity.VocMedStaffFactMO"/>
-        <mapping class="ru.integration.vocEntity.VocLpuSection"/>
-        <mapping class="ru.integration.vocEntity.VocLpuSectionProfile"/>
-        <mapping class="ru.integration.vocEntity.VocLpuSectionById"/>
-        <mapping class="ru.integration.vocEntity.VocMedStaffFactList"/>
-        <mapping class="ru.integration.vocEntity.MedStaffFactById"/>
-        <mapping class="ru.integration.vocEntity.VocDiag"/>
-        <mapping class="ru.integration.vocEntity.VocUslugaComplex"/>
+
+         <mapping class="ru.integration.deprecated.entities.schedule.FreeDateEntity"/>
+         <mapping class="ru.integration.deprecated.entities.schedule.FreeTimeEntity"/>
+         <mapping class="ru.integration.deprecated.entities.schedule.ListBusyDateTimeEntity"/>
+         <mapping class="ru.integration.deprecated.entities.schedule.BusyTimeEntity"/>
+         <mapping class="ru.integration.deprecated.entities.schedule.BusyDateEntity"/>
+         <mapping class="ru.integration.deprecated.entities.schedule.MedWorkerEntity"/>
+
+         <mapping class="ru.integration.deprecated.vocEntity.VocMedSpecOmc"/>
+         <mapping class="ru.integration.deprecated.vocEntity.VocMedSpecOmcMO"/>
+         <mapping class="ru.integration.deprecated.vocEntity.VocMedStaffFactMO"/>
+         <mapping class="ru.integration.deprecated.vocEntity.VocLpuSection"/>
+         <mapping class="ru.integration.deprecated.vocEntity.VocLpuSectionProfile"/>
+         <mapping class="ru.integration.deprecated.vocEntity.VocLpuSectionById"/>
+         <mapping class="ru.integration.deprecated.vocEntity.VocMedStaffFactList"/>
+         <mapping class="ru.integration.deprecated.vocEntity.MedStaffFactById"/>
+         <mapping class="ru.integration.deprecated.vocEntity.VocDiag"/>
+         <mapping class="ru.integration.deprecated.vocEntity.VocUslugaComplex"/>-->
     </session-factory>
 </hibernate-configuration>

@@ -19,8 +19,6 @@ import javax.ws.rs.core.Response;
 
 import ru.integration.model.Auth;
 
-
-
 public class Methods {
 
     public static String getJsonObj(JsonObject js, String key) {
@@ -41,7 +39,7 @@ public class Methods {
         } else return 0;
     }
 
-    public static String creteGetRequest(String endpoint, String path, Map<String, String> params) {
+ /*   public static String creteGetRequest(String endpoint, String path, Map<String, String> params) {
 
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(endpoint);
@@ -53,40 +51,27 @@ public class Methods {
         System.out.println(response);
         return response.readEntity(String.class);
     }
-
-    public static String creteGetRequest(String endpoint, String path) {
+*/
+  /*  public static String creteGetRequest(String endpoint, String path) {
         return creteGetRequest(endpoint, path, new HashMap<>());
     }
 
     public static String creteGetRequest(String path, Map<String, String> params) {
         return creteGetRequest(GlobalVariables.endpoint, path, params);
     }
+*/
 
-
-    public static String cretePostRequest(String path, String json) {
+   /* public static String cretePostRequest(String path, String json) {
 
         Client client = ClientBuilder.newClient();
         WebTarget target = client.target(GlobalVariables.endpoint);
         target = target.path(path);
-        /*for (Map.Entry entry : params.entrySet()) {
+        *//*for (Map.Entry entry : params.entrySet()) {
             target = target.queryParam(entry.getKey().toString(),entry.getValue().toString());
-        }*/
+        }*//*
         Response response = target.request(MediaType.APPLICATION_JSON).header("Cookie", "PHPSESSID=" + GlobalVariables.sessionId).post(Entity.json(json));
         System.out.println(response);
         return response.readEntity(String.class);
-    }
-
-   /* public static WebTarget creteGetRequest(String path, Map<String, String> params,String test){
-
-        Client client = ClientBuilder.newClient();
-        WebTarget target = client.target(endpoint);
-        target = target.path(path);
-        for (Map.Entry entry : params.entrySet()) {
-            target = target.queryParam(entry.getKey().toString(),entry.getValue().toString());
-        }
-         target.request(MediaType.APPLICATION_JSON).header("Cookie","PHPSESSID="+sessionId).get();
-        //System.out.println(response);
-        return  target;
     }*/
 
     public static String getErrorCode(JsonObject jparse) {
