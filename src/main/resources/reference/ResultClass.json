@@ -1,0 +1,176 @@
+//https://astrahan.promedweb.ru:1234/api/Refbook?Refbook_Code=dbo.ResultClass
+//Результат лечения
+
+{
+  "error_code": 0,
+  "data": [
+    {
+      "id": "66",
+      "Name": "Выздоровление",
+      "Code": 1,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "67",
+      "Name": "Улучшение",
+      "Code": 2,
+      "begDate": null,
+      "endDate": "2017-11-30"
+    },
+    {
+      "id": "68",
+      "Name": "Динамическое наблюдение",
+      "Code": 3,
+      "begDate": null,
+      "endDate": "2017-11-30"
+    },
+    {
+      "id": "69",
+      "Name": "Смерть",
+      "Code": 4,
+      "begDate": null,
+      "endDate": "2017-11-30"
+    },
+    {
+      "id": "70",
+      "Name": "Без перемен",
+      "Code": 5,
+      "begDate": null,
+      "endDate": "2017-11-30"
+    },
+    {
+      "id": "180",
+      "Name": "Лечение завершено",
+      "Code": 301,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "181",
+      "Name": "Лечение прервано по инициативе пациента",
+      "Code": 302,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "182",
+      "Name": "Лечение прервано по инициативе ЛПУ",
+      "Code": 303,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "183",
+      "Name": "Лечение продолжено",
+      "Code": 304,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "184",
+      "Name": "Направлен на госпитализацию",
+      "Code": 305,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "185",
+      "Name": "Направлен в дневной стационар",
+      "Code": 306,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "186",
+      "Name": "Направлен в стационар на дому",
+      "Code": 307,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "187",
+      "Name": "Направлен на консультацию",
+      "Code": 308,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "188",
+      "Name": "Направлен на консультацию в другое ЛПУ",
+      "Code": 309,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "189",
+      "Name": "Направлен в реабилитационное отделение",
+      "Code": 310,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "190",
+      "Name": "Направлен на санаторно-курортное лечение",
+      "Code": 311,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "191",
+      "Name": "Проведена дополнительная диспансеризация",
+      "Code": 312,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "192",
+      "Name": "Констатация факта смерти",
+      "Code": 313,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "193",
+      "Name": "Динамическое наблюдение",
+      "Code": 314,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "194",
+      "Name": "Направлен на обследования",
+      "Code": 315,
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "199",
+      "Name": "Без изменения",
+      "Code": 2,
+      "begDate": "2017-12-01",
+      "endDate": null
+    },
+    {
+      "id": "200",
+      "Name": "Улучшение",
+      "Code": 3,
+      "begDate": "2017-12-01",
+      "endDate": null
+    },
+    {
+      "id": "201",
+      "Name": "Ухудшение",
+      "Code": 4,
+      "begDate": "2017-12-01",
+      "endDate": null
+    },
+    {
+      "id": "202",
+      "Name": "Летальный исход",
+      "Code": 5,
+      "begDate": "2017-12-01",
+      "endDate": null
+    }
+  ]
+}

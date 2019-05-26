@@ -1,0 +1,84 @@
+// https://astrahan.promedweb.ru:1234/api/Refbook?Refbook_Code=dbo.TreatmentClass
+//Вид обращения
+{
+  "error_code": 0,
+  "data": [
+    {
+      "id": "1",
+      "Name": "Заболевание",
+      "Code": "1",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "2",
+      "Name": "В неотложной форме (Заболевание)",
+      "Code": "1.1",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "3",
+      "Name": "Активное посещение (Заболевание)",
+      "Code": "1.2",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "4",
+      "Name": "Диспансерное наблюдение (Заболевание)",
+      "Code": "1.3",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "5",
+      "Name": "С профилактическими и иными целями",
+      "Code": "2",
+      "begDate": null,
+      "endDate": "2015-12-31"
+    },
+    {
+      "id": "6",
+      "Name": "Медицинский осмотр (С профилактическими и иными целями)",
+      "Code": "2.1",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "7",
+      "Name": "Диспансеризация (С профилактическими и иными целями)",
+      "Code": "2.2",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "8",
+      "Name": "Комплексное обследование (С профилактическими и иными целями)",
+      "Code": "2.3",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "9",
+      "Name": "Паллиативная помощь (С профилактическими и иными целями)",
+      "Code": "2.4",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "10",
+      "Name": "Патронаж (С профилактическими и иными целями)",
+      "Code": "2.5",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "11",
+      "Name": "Другие обстоятельства (С профилактическими и иными целями)",
+      "Code": "2.6",
+      "begDate": null,
+      "endDate": null
+    }
+  ]
+}

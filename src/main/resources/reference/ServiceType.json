@@ -1,0 +1,57 @@
+//https://astrahan.promedweb.ru:1234/api/Refbook?Refbook_Code=dbo.ServiceType
+//Место обслуживания
+
+{
+  "error_code": 0,
+  "data": [
+    {
+      "id": "1",
+      "Name": "Поликлиника",
+      "Code": "1",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "2",
+      "Name": "На дому",
+      "Code": "2",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "3",
+      "Name": "На дому: Актив",
+      "Code": "3",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "4",
+      "Name": "Другое",
+      "Code": "6",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "5",
+      "Name": "На дому: НМП",
+      "Code": "4",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "6",
+      "Name": "Поликлиника: НМП",
+      "Code": "5",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "20",
+      "Name": "Мобильная медицинская бригада",
+      "Code": "7",
+      "begDate": "2018-04-16",
+      "endDate": null
+    }
+  ]
+}

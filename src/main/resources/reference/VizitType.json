@@ -1,0 +1,148 @@
+//https://astrahan.promedweb.ru:1234/api/Refbook?Refbook_Code=dbo.VizitType
+//Цель посещения
+
+{
+  "error_code": 0,
+  "data": [
+    {
+      "id": "102",
+      "Name": "Обращение по поводу заболевания",
+      "Code": "11",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "103",
+      "Name": "Разовое посещение по поводу заболевания",
+      "Code": "21",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "104",
+      "Name": "Диспансеризация граждан",
+      "Code": "22",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "105",
+      "Name": "Диспансерное наблюдение",
+      "Code": "23",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "106",
+      "Name": "Профосмотр",
+      "Code": "24",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "107",
+      "Name": "Центр здоровья",
+      "Code": "25",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "108",
+      "Name": "Патронаж",
+      "Code": "26",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "109",
+      "Name": "Посещения мед. работников ведущих самост. прием",
+      "Code": "28",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "110",
+      "Name": "Осмотры контактных в очаге инфекционного заб.",
+      "Code": "29",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "111",
+      "Name": "Осмотры беременных",
+      "Code": "30",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "112",
+      "Name": "Осмотры связанные с прививками",
+      "Code": "32",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "113",
+      "Name": "Осмотры учеников",
+      "Code": "33",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "114",
+      "Name": "Оформление опеки или попечительства",
+      "Code": "34",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "115",
+      "Name": "Посещение по поводу неотложной помощи",
+      "Code": "31",
+      "begDate": null,
+      "endDate": null
+    },
+    {
+      "id": "116",
+      "Name": "Иная",
+      "Code": "27",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "117",
+      "Name": "Консультация",
+      "Code": "35",
+      "begDate": null,
+      "endDate": "2015-05-31"
+    },
+    {
+      "id": "216",
+      "Name": "Мобильная поликлиника",
+      "Code": "35",
+      "begDate": "2016-01-01",
+      "endDate": null
+    },
+    {
+      "id": "217",
+      "Name": "С профилактической целью",
+      "Code": "33",
+      "begDate": "2016-01-01",
+      "endDate": null
+    },
+    {
+      "id": "218",
+      "Name": "Консультативно-диагностическая",
+      "Code": "36",
+      "begDate": "2018-01-01",
+      "endDate": null
+    },
+    {
+      "id": "227",
+      "Name": "Иная",
+      "Code": "37",
+      "begDate": "2018-10-01",
+      "endDate": null
+    }
+  ]
+}

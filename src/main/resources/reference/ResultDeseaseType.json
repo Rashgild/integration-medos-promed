@@ -1,0 +1,127 @@
+//https://astrahan.promedweb.ru:1234/api/Refbook?Refbook_Code=fed.ResultDeseaseType
+//Исход заболевания
+
+{
+  "error_code": 0,
+  "data": [
+    {
+      "id": "1",
+      "Name": "Выздоровление",
+      "Code": 101,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "2",
+      "Name": "Улучшение",
+      "Code": 102,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "3",
+      "Name": "Без перемен",
+      "Code": 103,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "4",
+      "Name": "Ухудшение",
+      "Code": 104,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "5",
+      "Name": "Выздоровление",
+      "Code": 201,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "6",
+      "Name": "Улучшение",
+      "Code": 202,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "7",
+      "Name": "Без перемен",
+      "Code": 203,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "8",
+      "Name": "Ухудшение",
+      "Code": 204,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "9",
+      "Name": "Выздоровление",
+      "Code": 301,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "10",
+      "Name": "Ремиссия",
+      "Code": 302,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "11",
+      "Name": "Улучшение",
+      "Code": 303,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "12",
+      "Name": "Без перемен",
+      "Code": 304,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "13",
+      "Name": "Ухудшение",
+      "Code": 305,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "14",
+      "Name": "Улучшение",
+      "Code": 401,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "15",
+      "Name": "Без эффекта",
+      "Code": 402,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "16",
+      "Name": "Ухудшение",
+      "Code": 403,
+      "begDate": "2011-01-01",
+      "endDate": null
+    },
+    {
+      "id": "17",
+      "Name": "Осмотр",
+      "Code": 306,
+      "begDate": "2012-01-23",
+      "endDate": null
+    }
+  ]
+}
