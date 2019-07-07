@@ -1,7 +1,7 @@
 package ru.integration.service;
 
-import ru.integration.model.Auth;
+import ru.integration.model.Token;
 
 public interface AuthService {
-    Auth getSessionId();
+    Token getToken();
 }

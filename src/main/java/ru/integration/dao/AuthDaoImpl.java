@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 
-import ru.integration.model.Auth;
-
 @Repository("AuthDao")
 public class AuthDaoImpl extends AbstractDao implements AuthDao {
 
@@ -25,16 +23,5 @@ public class AuthDaoImpl extends AbstractDao implements AuthDao {
                 .queryParam("password", environment.getProperty("promed.password"))
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
-    }
-
-    @Override
-    public Auth getSessionId() {
-        Auth e = new Auth();
-        return e;
-    }
-
-    @Override
-    public void save(Auth auth) {
-        persist(auth);
     }
 }

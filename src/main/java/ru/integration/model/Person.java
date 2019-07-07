@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@Deprecated
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "person")

@@ -1,4 +1,4 @@
-package ru.integration.model.jsonEntity;
+package ru.integration.model.medosEntity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,6 +32,10 @@ public class Tap {
         return visits;
     }
 
+    public int getVisitsCount(){
+        return getVisits().size();
+    }
+
     public void setVisits(List<Visit> visits) {
         this.visits = visits;
     }
@@ -60,9 +64,13 @@ public class Tap {
         isFinish = finish;
     }
 
- /*   public void setFinish(int finish) {
-        isFinish = finish == 1;
-    }*/
+    public Integer getResultClass() {
+        return resultClass;
+    }
+
+    public void setResultClass(Integer resultClass) {
+        this.resultClass = resultClass;
+    }
 
     public Integer getDiagLid() {
         return diagLid;

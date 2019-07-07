@@ -1,4 +1,4 @@
-package ru.integration.model.jsonEntity;
+package ru.integration.model.medosEntity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

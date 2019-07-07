@@ -1,4 +1,4 @@
-package ru.integration.model.jsonEntity;
+package ru.integration.model.medosEntity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -31,8 +31,11 @@ public class Visit {
     @JsonProperty("Diag_lid")
     private Integer diagId;
 
+    @JsonProperty("Diag_code")
+    private String diagCode;
+
     @JsonProperty("LpuSection_id")
-    private Integer lpuSectionId;
+    private Long lpuSectionId;
 
     @JsonProperty("diary")
     private String diary;
@@ -41,7 +44,7 @@ public class Visit {
     private Integer medicalCareKindId;
 
     @JsonProperty("Mes_id")
-    private Integer mesId;
+    private Long mesId;
 
     @JsonProperty("PayType_id")
     private String payType;
@@ -49,11 +52,11 @@ public class Visit {
     @JsonProperty("Evn_setDT")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonFormat(pattern = "yyyy-MM-ddHH:mm:ss")
-    private LocalDateTime Evn_setDT;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime visitDate;
 
     @JsonProperty("VizitType_id")
-    private Integer VizitType_id;
+    private Integer visitTypeId;
 
     private Boolean firstVisit;
 
@@ -109,11 +112,19 @@ public class Visit {
         this.diagId = diagId;
     }
 
-    public Integer getLpuSectionId() {
+    public String getDiagCode() {
+        return diagCode;
+    }
+
+    public void setDiagCode(String diagCode) {
+        this.diagCode = diagCode;
+    }
+
+    public Long getLpuSectionId() {
         return lpuSectionId;
     }
 
-    public void setLpuSectionId(Integer lpuSectionId) {
+    public void setLpuSectionId(Long lpuSectionId) {
         this.lpuSectionId = lpuSectionId;
     }
 
@@ -133,11 +144,11 @@ public class Visit {
         this.medicalCareKindId = medicalCareKindId;
     }
 
-    public Integer getMesId() {
+    public Long getMesId() {
         return mesId;
     }
 
-    public void setMesId(Integer mesId) {
+    public void setMesId(Long mesId) {
         this.mesId = mesId;
     }
 
@@ -149,20 +160,20 @@ public class Visit {
         this.payType = payType;
     }
 
-    public LocalDateTime getEvn_setDT() {
-        return Evn_setDT;
+    public LocalDateTime getVisitDate() {
+        return visitDate;
     }
 
-    public void setEvn_setDT(LocalDateTime evn_setDT) {
-        Evn_setDT = evn_setDT;
+    public void setVisitDate(LocalDateTime visitDate) {
+        this.visitDate = visitDate;
     }
 
-    public Integer getVizitType_id() {
-        return VizitType_id;
+    public Integer getVisitTypeId() {
+        return visitTypeId;
     }
 
-    public void setVizitType_id(Integer vizitType_id) {
-        VizitType_id = vizitType_id;
+    public void setVisitTypeId(Integer visitTypeId) {
+        visitTypeId = visitTypeId;
     }
 
     public WorkStaff getWorkStaff() {
@@ -173,12 +184,26 @@ public class Visit {
         this.workStaff = workStaff;
     }
 
+    public boolean checkWarnFields(){
+        return this.diagCode != null && this.medStaffId != null && this.lpuSectionId != null;
+    }
+
+    //TODO visit codes
+    public int getVisitType(int count) {
+        if (diagCode.contains("Z")) {
+            return 106;
+        } else if (count == 1) {
+            return 103;
+        } else {
+            return 102;
+        }
+    }
+
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class VisitList {
 
         @JsonProperty("visits")
         private List<Visit> visits;
-
 
         public List<Visit> getVisits() {
             return visits;
