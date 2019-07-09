@@ -29,4 +29,16 @@ public class PersonServiceImpl implements PersonService {
         }
         return null;
     }
+
+    @Override
+    public Person getPersonById(int id) {
+        ClientResponse response = dao.getPersonByIdFormPromed(id);
+        if (response.getStatus() == HttpStatus.OK.value()) {
+            Person.Persons persons = response.getEntity(Person.Persons.class);
+            if (persons != null && persons.getPersonList().size() > 0) {
+                return persons.getPersonList().get(0);
+            }
+        }
+        return null;
+    }
 }

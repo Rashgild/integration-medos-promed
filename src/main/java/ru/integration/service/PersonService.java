@@ -5,4 +5,6 @@ import ru.integration.model.promedEntity.Person;
 
 public interface PersonService {
     Person getPersonFromPromed(Patient patient);
+
+    Person getPersonById(int id);
 }
