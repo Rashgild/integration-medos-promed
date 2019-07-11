@@ -2,15 +2,13 @@ package ru.integration.service;
 
 import com.sun.jersey.api.client.ClientResponse;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ru.integration.dao.ScheduleDao;
-import ru.integration.model.medosEntity.ScheduleEntry;
-import ru.integration.model.promedEntity.Person;
-import ru.integration.model.promedEntity.TimeTable;
+import ru.integration.model.medos.ScheduleEntry;
+import ru.integration.model.promed.Person;
+import ru.integration.model.promed.TimeTable;
 
 @Service("CalendarService")
 public class ScheduleServiceImpl implements ScheduleService {

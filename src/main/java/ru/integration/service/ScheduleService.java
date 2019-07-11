@@ -2,9 +2,9 @@ package ru.integration.service;
 
 import com.sun.jersey.api.client.ClientResponse;
 
-import ru.integration.model.medosEntity.ScheduleEntry;
-import ru.integration.model.promedEntity.Person;
-import ru.integration.model.promedEntity.TimeTable;
+import ru.integration.model.medos.ScheduleEntry;
+import ru.integration.model.promed.Person;
+import ru.integration.model.promed.TimeTable;
 
 public interface ScheduleService {
     ClientResponse getDateTables(String date);

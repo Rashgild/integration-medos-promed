@@ -2,7 +2,7 @@ package ru.integration.dao;
 
 import com.sun.jersey.api.client.ClientResponse;
 
-import ru.integration.model.medosEntity.ScheduleEntry;
+import ru.integration.model.medos.ScheduleEntry;
 
 public interface ScheduleDao {
 

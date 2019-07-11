@@ -25,7 +25,7 @@ public class AuthController {
      *
      * @return json with session id
      */
-    @RequestMapping(value = "/session-id", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/get-token", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity getSessionId() {
         Token token = authService.getToken();
         System.out.println(token.getErrorCode());

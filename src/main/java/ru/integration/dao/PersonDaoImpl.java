@@ -6,8 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Repository;
 
-import ru.integration.model.Person;
-import ru.integration.model.medosEntity.Patient;
+import ru.integration.model.medos.Patient;
 
 @Repository("PersonDao")
 public class PersonDaoImpl extends AbstractDao implements PersonDao {
@@ -25,7 +24,7 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao {
     }
 
     @Override
-    public ClientResponse getPersonByData(Patient patient){
+    public ClientResponse getPersonByData(Patient patient) {
 
         return client
                 .resource(environment.getProperty("promed.endpoint"))
@@ -38,10 +37,5 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao {
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
 
-    }
-
-    @Override
-    public void save(Person person) {
-        persist(person);
     }
 }

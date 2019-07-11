@@ -21,9 +21,4 @@ public class MedWorkerDaoImpl extends AbstractDao implements MedWorkerDao {
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
     }
-
-    @Override
-    public void save(MedWorker medWorker){
-        persist(medWorker);
-    }
 }

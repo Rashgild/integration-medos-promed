@@ -31,9 +31,4 @@ public class MedStaffServiceImpl implements MedStaffService {
         }
         return null;
     }
-
-    @Override
-    public void saveMedstaff(MedStaff medStaff) {
-        dao.save(medStaff);
-    }
 }

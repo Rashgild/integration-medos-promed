@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.ClientResponse;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,10 +16,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import ru.integration.model.medosEntity.ScheduleEntry;
-import ru.integration.model.promedEntity.DateTable;
-import ru.integration.model.promedEntity.Person;
-import ru.integration.model.promedEntity.TimeTable;
+import ru.integration.model.medos.ScheduleEntry;
+import ru.integration.model.promed.DateTable;
+import ru.integration.model.promed.Person;
+import ru.integration.model.promed.TimeTable;
 import ru.integration.service.PersonService;
 import ru.integration.service.ScheduleService;
 
@@ -31,8 +33,17 @@ public class ScheduleController {
     @Autowired
     private PersonService personService;
 
-    @RequestMapping(value = "/sync-on-date", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity epicExport(@RequestParam(value = "date") String date) {
+    private boolean start = false;
+    private Map<String,String> result;
+
+    /**
+     * Synchronize patients from promed to medos.
+     *
+     * @param date date of sync
+     * @return ResponseEntity
+     */
+    @RequestMapping(value = "/sync-by-date", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity syncByDate(@RequestParam(value = "date") String date) {
 
         System.out.println(date);
         ClientResponse response = service.getDateTables(date);
@@ -42,7 +53,7 @@ public class ScheduleController {
 
             if (data != null) {
                 List<DateTable> dateTableList = data.getData();
-
+               result = new HashMap<>();
                 for (DateTable dateTable : dateTableList) {
                     Person person = personService.getPersonById(dateTable.getPersonId());
                     if (person != null) {
@@ -54,12 +65,14 @@ public class ScheduleController {
 
                             ObjectMapper objectMapper = new ObjectMapper();
                             try {
-                                System.out.println(objectMapper.writeValueAsString(entry));
+                                String req = objectMapper.writeValueAsString(entry);
+                                response = service.sendToMedos(entry);
+                                String resp = response.getEntity(String.class);
+
                             } catch (JsonProcessingException e) {
                                 e.printStackTrace();
                             }
-                            response = service.sendToMedos(entry);
-                            System.out.println(response.getEntity(String.class));
+
                         }
                     } else {
                         System.out.println("person is null:" + dateTable.getPersonId());

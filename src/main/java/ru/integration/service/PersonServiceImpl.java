@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.integration.dao.PersonDao;
-import ru.integration.model.medosEntity.Patient;
-import ru.integration.model.promedEntity.Person;
+import ru.integration.model.medos.Patient;
+import ru.integration.model.promed.Person;
 
 @Service("PersonService")
 @Transactional

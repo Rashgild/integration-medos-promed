@@ -6,7 +6,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.springframework.stereotype.Repository;
 
-import ru.integration.model.medosEntity.ScheduleEntry;
+import ru.integration.model.medos.ScheduleEntry;
 
 @Repository("CalendarDao")
 public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {

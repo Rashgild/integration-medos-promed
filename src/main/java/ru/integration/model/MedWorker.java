@@ -28,12 +28,6 @@ public class MedWorker {
     @Column(name = "medworker_id")//promed_id
     private Integer medWorkerId;
 
-    @JoinColumn(name = "person_id")
-    @OneToOne
-    @JsonProperty("Person_id")
-    private Person personId;
-
-
     public Integer getId() {
         return id;
     }
@@ -50,13 +44,6 @@ public class MedWorker {
         this.medWorkerId = medWorkerId;
     }
 
-    public Person getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Person personId) {
-        this.personId = personId;
-    }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class MedWorkerList {
