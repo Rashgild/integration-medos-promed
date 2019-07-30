@@ -34,8 +34,12 @@ public class ScheduleController {
     private PersonService personService;
 
     private boolean start = false;
-    private Map<String,String> result;
+    private Map<String, String> result;
 
+    @RequestMapping(value = "/test")
+    public String test(){
+        return "hello";
+    }
     /**
      * Synchronize patients from promed to medos.
      *
@@ -53,7 +57,7 @@ public class ScheduleController {
 
             if (data != null) {
                 List<DateTable> dateTableList = data.getData();
-               result = new HashMap<>();
+                result = new HashMap<>();
                 for (DateTable dateTable : dateTableList) {
                     Person person = personService.getPersonById(dateTable.getPersonId());
                     if (person != null) {
@@ -69,10 +73,13 @@ public class ScheduleController {
                                 response = service.sendToMedos(entry);
                                 String resp = response.getEntity(String.class);
 
+                                System.out.println(">>>>>>>>");
+                                System.out.println(req);
+                                System.out.println(resp);
+                                System.out.println(">>>>>>>>");
                             } catch (JsonProcessingException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     } else {
                         System.out.println("person is null:" + dateTable.getPersonId());

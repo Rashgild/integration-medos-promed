@@ -4,14 +4,18 @@ import com.sun.jersey.api.client.ClientResponse;
 
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ru.integration.model.medos.ScheduleEntry;
+import ru.integration.service.AuthService;
 
 @Repository("CalendarDao")
 public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {
 
-    //TODO Lpu_id и phpSessId;
+    @Autowired
+    private AuthService authService;
+
     @Override
     public ClientResponse getDate(String date) {
 
@@ -20,8 +24,8 @@ public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {
                 .path("api/TimeTableGraf/TimeTableGrafbyMO")
                 .queryParam("TimeTableGraf_beg", String.valueOf(date))
                 .queryParam("TimeTableGraf_end", String.valueOf(date))
-                .queryParam("Lpu_id", "13003256")
-                .header("Cookie", "PHPSESSID=3rod9uh482ol0qoenpau7ic4a3")
+                .queryParam("Lpu_id", environment.getProperty("lpu.id"))
+                .header("Cookie", "PHPSESSID=" + authService.getToken().getSessId())
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
     }
@@ -33,7 +37,7 @@ public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {
                 .resource(environment.getProperty("promed.endpoint"))
                 .path("api/TimeTableGraf/TimeTableGrafById")
                 .queryParam("TimeTableGraf_id", String.valueOf(dateId))
-                .header("Cookie", "PHPSESSID=3rod9uh482ol0qoenpau7ic4a3")
+                .header("Cookie", "PHPSESSID=" + authService.getToken().getSessId())
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
 

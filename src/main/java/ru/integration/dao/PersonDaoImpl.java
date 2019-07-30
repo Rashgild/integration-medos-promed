@@ -4,12 +4,17 @@ import com.sun.jersey.api.client.ClientResponse;
 
 import javax.ws.rs.core.MediaType;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import ru.integration.model.medos.Patient;
+import ru.integration.service.AuthService;
 
 @Repository("PersonDao")
 public class PersonDaoImpl extends AbstractDao implements PersonDao {
+
+    @Autowired
+    private AuthService service;
 
     @Override
     public ClientResponse getPersonByIdFormPromed(Integer personId) {
@@ -18,7 +23,7 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao {
                 .resource(environment.getProperty("promed.endpoint"))
                 .path("api/Person")
                 .queryParam("Person_id", String.valueOf(personId))
-                .header("Cookie", "PHPSESSID=" + environment.getProperty("sessionId"))
+                .header("Cookie", "PHPSESSID=" + service.getToken().getSessId())
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
     }
@@ -33,7 +38,7 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao {
                 .queryParam("PersonFirName_FirName", patient.getFirstname())
                 .queryParam("PersonBirthDay_BirthDay", String.valueOf(patient.getBirthday()))
                 .queryParam("PersonSnils_Snils", patient.getSnils())
-                .header("Cookie", "PHPSESSID=3rod9uh482ol0qoenpau7ic4a3")
+                .header("Cookie", "PHPSESSID=" + service.getToken().getSessId())
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
 

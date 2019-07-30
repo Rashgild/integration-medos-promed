@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ru.integration.dao.AuthDao;
-import ru.integration.model.Auth;
 import ru.integration.model.Token;
 
 @Service("AuthService")
@@ -17,9 +16,16 @@ public class AuthServiceImpl implements AuthService {
     @Autowired
     private AuthDao authDao;
 
+    private Token token;
+
     @Override
     public Token getToken() {
-        ClientResponse response = authDao.getAuthToken();
-        return response.getEntity(Token.class);
+        if (token == null) {
+            ClientResponse response = authDao.getAuthToken();
+            token = response.getEntity(Token.class);
+            return token;
+        } else {
+            return token;
+        }
     }
 }
