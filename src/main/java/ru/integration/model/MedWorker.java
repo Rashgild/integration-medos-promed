@@ -4,28 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Entity
-@Table(name = "medworker")
 public class MedWorker {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", updatable = false, nullable = false)
     private Integer id;
 
-    @Basic
-    @Column(name = "medworker_id")//promed_id
     private Integer medWorkerId;
 
     public Integer getId() {

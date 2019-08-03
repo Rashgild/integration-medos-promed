@@ -4,39 +4,21 @@ package ru.integration.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-
-
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
-@Entity
-@Table(name = "auth")
 public class Auth {
 
     public Auth() {
         this.expire = false;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
 
-    @Basic
     @JsonProperty("sess_id")
-    @Column(name = "sess_id")
     private String phpSessId;
 
-    @Basic
-    @Column(name = "isExpire")
     private Boolean expire;
 
     public Integer getId() {
