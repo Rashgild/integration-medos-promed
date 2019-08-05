@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.ClientResponse;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,9 +38,10 @@ public class ScheduleController {
     private Map<String, String> result;
 
     @RequestMapping(value = "/test")
-    public String test(){
+    public String test() {
         return "hello";
     }
+
     /**
      * Synchronize patients from promed to medos.
      *
@@ -47,8 +49,11 @@ public class ScheduleController {
      * @return ResponseEntity
      */
     @RequestMapping(value = "/sync-by-date", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity syncByDate(@RequestParam(value = "date") String date) {
+    public ResponseEntity syncByDate(@RequestParam(value = "date", required = false) LocalDate date) {
 
+        if(date == null){
+            date = LocalDate.now().plusDays(1L);
+        }
         System.out.println(date);
         ClientResponse response = service.getDateTables(date);
 

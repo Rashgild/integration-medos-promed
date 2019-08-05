@@ -2,6 +2,7 @@ package ru.integration.dao;
 
 import com.sun.jersey.api.client.ClientResponse;
 
+import java.time.LocalDate;
 import javax.ws.rs.core.MediaType;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {
     private AuthService authService;
 
     @Override
-    public ClientResponse getDate(String date) {
+    public ClientResponse getDate(LocalDate date) {
 
         return client
                 .resource(environment.getProperty("promed.endpoint"))

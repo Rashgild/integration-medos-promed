@@ -2,6 +2,8 @@ package ru.integration.service;
 
 import com.sun.jersey.api.client.ClientResponse;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +19,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     private ScheduleDao dao;
 
     @Override
-    public ClientResponse getDateTables(String date) {
+    public ClientResponse getDateTables(LocalDate date) {
         return dao.getDate(date);
     }
 
