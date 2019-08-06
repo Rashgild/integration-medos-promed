@@ -18,7 +18,7 @@ public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {
     private AuthService authService;
 
     @Override
-    public ClientResponse getDate(LocalDate date) {
+    public ClientResponse getDate(String date) {
 
         return client
                 .resource(environment.getProperty("promed.endpoint"))

@@ -19,7 +19,7 @@ public class ScheduleServiceImpl implements ScheduleService {
     private ScheduleDao dao;
 
     @Override
-    public ClientResponse getDateTables(LocalDate date) {
+    public ClientResponse getDateTables(String date) {
         return dao.getDate(date);
     }
 

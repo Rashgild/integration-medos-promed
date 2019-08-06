@@ -9,7 +9,7 @@ import ru.integration.model.promed.Person;
 import ru.integration.model.promed.TimeTable;
 
 public interface ScheduleService {
-    ClientResponse getDateTables(LocalDate date);
+    ClientResponse getDateTables(String date);
 
     ClientResponse getTimeByDateId(int dateId);
 

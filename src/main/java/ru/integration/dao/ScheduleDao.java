@@ -8,7 +8,7 @@ import ru.integration.model.medos.ScheduleEntry;
 
 public interface ScheduleDao {
 
-    ClientResponse getDate(LocalDate date);
+    ClientResponse getDate(String date);
 
     ClientResponse getTimeByDateId(int dateId);
 

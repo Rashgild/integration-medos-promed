@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.ClientResponse;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +35,6 @@ public class ScheduleController {
     @Autowired
     private PersonService personService;
 
-    private boolean start = false;
-    private Map<String, String> result;
-
     @RequestMapping(value = "/test")
     public String test() {
         return "hello";
@@ -49,20 +47,20 @@ public class ScheduleController {
      * @return ResponseEntity
      */
     @RequestMapping(value = "/sync-by-date", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity syncByDate(@RequestParam(value = "date", required = false) LocalDate date) {
+    public ResponseEntity syncByDate(@RequestParam(value = "date", required = false) String date) {
 
-        if(date == null){
-            date = LocalDate.now().plusDays(1L);
+        if (date == null) {
+            date = String.valueOf(LocalDate.now().plusDays(1L));
         }
         System.out.println(date);
-        ClientResponse response = service.getDateTables(date);
 
+        ClientResponse response = service.getDateTables(date);
+        List<Object> results = new ArrayList<>();
         if (response.getStatus() == HttpStatus.OK.value()) {
             DateTable.Data data = response.getEntity(DateTable.Data.class);
 
             if (data != null) {
                 List<DateTable> dateTableList = data.getData();
-                result = new HashMap<>();
                 for (DateTable dateTable : dateTableList) {
                     Person person = personService.getPersonById(dateTable.getPersonId());
                     if (person != null) {
@@ -78,10 +76,10 @@ public class ScheduleController {
                                 response = service.sendToMedos(entry);
                                 String resp = response.getEntity(String.class);
 
-                                System.out.println(">>>>>>>>");
-                                System.out.println(req);
-                                System.out.println(resp);
-                                System.out.println(">>>>>>>>");
+                                Map<String, String> json = new HashMap<>();
+                                json.put("request", req);
+                                json.put("response", resp);
+                                results.add(json);
                             } catch (JsonProcessingException e) {
                                 e.printStackTrace();
                             }
@@ -90,13 +88,15 @@ public class ScheduleController {
                         System.out.println("person is null:" + dateTable.getPersonId());
                     }
                 }
-
             } else {
                 return new ResponseEntity("{\"status\":\"За данный период записей не найдено\"}", HttpStatus.BAD_REQUEST);
             }
         } else {
             return new ResponseEntity("{\"status\":\"Произошла ошибка\"}", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(HttpStatus.OK);
+
+        Map<String, List<Object>> result = new HashMap<>();
+        result.put("data", results);
+        return new ResponseEntity(result, HttpStatus.OK);
     }
 }
