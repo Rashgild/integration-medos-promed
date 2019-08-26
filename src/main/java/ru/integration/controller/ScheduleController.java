@@ -22,6 +22,7 @@ import ru.integration.model.medos.ScheduleEntry;
 import ru.integration.model.promed.DateTable;
 import ru.integration.model.promed.Person;
 import ru.integration.model.promed.TimeTable;
+import ru.integration.service.AuthService;
 import ru.integration.service.PersonService;
 import ru.integration.service.ScheduleService;
 
@@ -35,10 +36,8 @@ public class ScheduleController {
     @Autowired
     private PersonService personService;
 
-    @RequestMapping(value = "/test")
-    public String test() {
-        return "hello";
-    }
+    @Autowired
+    private AuthService authService;
 
     /**
      * Synchronize patients from promed to medos.
@@ -95,6 +94,7 @@ public class ScheduleController {
             return new ResponseEntity("{\"status\":\"Произошла ошибка\"}", HttpStatus.BAD_REQUEST);
         }
 
+        authService.logout();
         Map<String, List<Object>> result = new HashMap<>();
         result.put("data", results);
         return new ResponseEntity(result, HttpStatus.OK);

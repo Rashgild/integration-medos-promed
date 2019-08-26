@@ -3,6 +3,7 @@ package ru.integration.service;
 import com.sun.jersey.api.client.ClientResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +27,14 @@ public class AuthServiceImpl implements AuthService {
             return token;
         } else {
             return token;
+        }
+    }
+
+    @Override
+    public void logout() {
+        ClientResponse response = authDao.logout();
+        if (response.getStatus() == HttpStatus.OK.value()) {
+            this.token = null;
         }
     }
 }
