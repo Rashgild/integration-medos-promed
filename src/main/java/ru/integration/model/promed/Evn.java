@@ -153,6 +153,7 @@ public class Evn {
                 break;
             case 305:
                 this.resultClassId = 184;
+                break;
             default:
                 break;
         }
