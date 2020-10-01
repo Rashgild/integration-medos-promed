@@ -8,6 +8,9 @@
     <artifactId>integration-medos-promed</artifactId>
     <version>1.0</version>
 
+    <properties>
+        <java.version>11</java.version>
+    </properties>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -78,7 +81,12 @@
 
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx-base</artifactId>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
             <version>11</version>
         </dependency>
     </dependencies>

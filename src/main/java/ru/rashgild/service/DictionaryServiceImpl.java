@@ -1,16 +1,15 @@
 package ru.rashgild.service;
 
 import com.sun.jersey.api.client.ClientResponse;
-
-import java.util.List;
-import javax.annotation.PostConstruct;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
+import ru.rashgild.config.Config;
 import ru.rashgild.dao.DictionaryDao;
 import ru.rashgild.model.promed.dictionary.LpuSectionDictionary;
 import ru.rashgild.model.promed.dictionary.MedstaffDictionary;
+
+import javax.annotation.PostConstruct;
+import java.util.List;
 
 @Service
 public class DictionaryServiceImpl implements DictionaryService {
@@ -23,9 +22,13 @@ public class DictionaryServiceImpl implements DictionaryService {
         this.dictionaryDao = dictionaryDao;
     }
 
+    {
+        Config.disableSslVerification();
+    }
+
     @PostConstruct
     private void init() {
-        System.out.println("initialise dictionaries");
+        System.out.println("initialize dictionaries");
         lpuSectionCacheInit();
     }
 
