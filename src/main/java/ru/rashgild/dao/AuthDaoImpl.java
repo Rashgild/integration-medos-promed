@@ -1,11 +1,10 @@
 package ru.rashgild.dao;
 
 import com.sun.jersey.api.client.ClientResponse;
-
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
+
+import javax.ws.rs.core.MediaType;
 
 @Repository("AuthDao")
 public class AuthDaoImpl extends AbstractDao implements AuthDao {
@@ -15,9 +14,6 @@ public class AuthDaoImpl extends AbstractDao implements AuthDao {
 
     @Value("${promed.password}")
     private String promedPassword;
-
-    @Value("${promed.endpoint}")
-    private String promedEndpoint;
 
     @Value("${promed.endpoint.login}")
     private String promedEndpointLogin;

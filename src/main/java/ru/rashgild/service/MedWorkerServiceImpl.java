@@ -2,20 +2,18 @@ package ru.rashgild.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.ClientResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ru.rashgild.dao.MedWorkerDao;
 import ru.rashgild.model.MedWorker;
 
 @Service("MedWorkerService")
 @Transactional
+@RequiredArgsConstructor
 public class MedWorkerServiceImpl implements MedWorkerService {
 
-    @Autowired
-    private MedWorkerDao dao;
+    private final MedWorkerDao dao;
 
     @Override
     public MedWorker getMedWorkerFromPromed(Integer medWorkerId) {

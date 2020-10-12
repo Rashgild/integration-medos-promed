@@ -3,21 +3,14 @@ package ru.rashgild.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.ClientResponse;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import ru.rashgild.model.medos.ScheduleEntry;
 import ru.rashgild.model.promed.DateTable;
 import ru.rashgild.model.promed.Person;
@@ -26,8 +19,15 @@ import ru.rashgild.service.AuthService;
 import ru.rashgild.service.PersonService;
 import ru.rashgild.service.ScheduleService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/schedule")
+@Slf4j
 public class ScheduleController {
 
     @Autowired
@@ -45,13 +45,13 @@ public class ScheduleController {
      * @param date date of sync
      * @return ResponseEntity
      */
-    @RequestMapping(value = "/sync-by-date", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/sync-by-date", produces = "application/json")
     public ResponseEntity syncByDate(@RequestParam(value = "date", required = false) String date) {
 
         if (date == null) {
             date = String.valueOf(LocalDate.now().plusDays(1L));
         }
-        System.out.println(date);
+        log.info(date);
 
         ClientResponse response = service.getDateTables(date);
         List<Object> results = new ArrayList<>();
@@ -59,14 +59,14 @@ public class ScheduleController {
             DateTable.Data data = response.getEntity(DateTable.Data.class);
 
             if (data != null) {
-                List<DateTable> dateTableList = data.getData();
+                List<DateTable> dateTableList = data.getDateTables();
                 for (DateTable dateTable : dateTableList) {
                     Person person = personService.getPersonById(dateTable.getPersonId());
                     if (person != null) {
                         response = service.getTimeByDateId(dateTable.getDateId());
                         if (response.getStatus() == HttpStatus.OK.value()) {
                             TimeTable.Data timeDate = response.getEntity(TimeTable.Data.class);
-                            TimeTable timeTable = timeDate.getData().get(0);
+                            TimeTable timeTable = timeDate.getTimeTables().get(0);
                             ScheduleEntry entry = service.createMedosModel(person, timeTable);
 
                             ObjectMapper objectMapper = new ObjectMapper();
@@ -84,7 +84,7 @@ public class ScheduleController {
                             }
                         }
                     } else {
-                        System.out.println("person is null:" + dateTable.getPersonId());
+                        log.info("person is null:" + dateTable.getPersonId());
                     }
                 }
             } else {

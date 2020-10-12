@@ -2,12 +2,16 @@ package ru.rashgild.model.promed;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
+@Getter
+@Setter
 public class EvnVisitResponse {
     @JsonProperty("Evn_id")
     private String evnId;
@@ -15,24 +19,10 @@ public class EvnVisitResponse {
     @JsonProperty("EvnVizitPL_id")
     private String evnVisitPlId;
 
-    public String getEvnId() {
-        return evnId;
-    }
-
-    public void setEvnId(String evnId) {
-        this.evnId = evnId;
-    }
-
-    public String getEvnVisitPlId() {
-        return evnVisitPlId;
-    }
-
-    public void setEvnVisitPlId(String evnVisitPlId) {
-        this.evnVisitPlId = evnVisitPlId;
-    }
-
     @XmlRootElement
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
+    @Setter
     public static class ResponseData {
 
         @JsonProperty("error_code")
@@ -42,7 +32,7 @@ public class EvnVisitResponse {
         private List<EvnVisitResponse> data;
 
         public boolean isSuccess() {
-            return data != null && data.size() > 0 && error == 0;
+            return data != null && !data.isEmpty() && error == 0;
         }
 
         public String getVisitId() {
@@ -51,22 +41,6 @@ public class EvnVisitResponse {
 
         public String getEvnId() {
             return data.get(0).evnVisitPlId;
-        }
-
-        public List<EvnVisitResponse> getData() {
-            return data;
-        }
-
-        public void setData(List<EvnVisitResponse> data) {
-            this.data = data;
-        }
-
-        public Integer getError() {
-            return error;
-        }
-
-        public void setError(Integer error) {
-            this.error = error;
         }
     }
 }

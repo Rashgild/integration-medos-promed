@@ -1,14 +1,12 @@
 package ru.rashgild.dao;
 
 import com.sun.jersey.api.client.ClientResponse;
-
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
 import ru.rashgild.model.medos.ScheduleEntry;
 import ru.rashgild.service.AuthService;
+
+import javax.ws.rs.core.MediaType;
 
 @Repository("CalendarDao")
 public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {
@@ -25,7 +23,7 @@ public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {
                 .queryParam("TimeTableGraf_beg", String.valueOf(date))
                 .queryParam("TimeTableGraf_end", String.valueOf(date))
                 .queryParam("Lpu_id", environment.getProperty("lpu.id"))
-                .header("Cookie", "PHPSESSID=" + authService.getToken().getSessId())
+                .header("Cookie", "PHPSESSID=" + authService.getSessionId())
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
     }
@@ -37,7 +35,7 @@ public class ScheduleDaoImpl extends AbstractDao implements ScheduleDao {
                 .resource(environment.getProperty("promed.endpoint"))
                 .path("api/TimeTableGraf/TimeTableGrafById")
                 .queryParam("TimeTableGraf_id", String.valueOf(dateId))
-                .header("Cookie", "PHPSESSID=" + authService.getToken().getSessId())
+                .header("Cookie", "PHPSESSID=" + authService.getSessionId())
                 .accept(MediaType.APPLICATION_JSON_TYPE)
                 .get(ClientResponse.class);
 

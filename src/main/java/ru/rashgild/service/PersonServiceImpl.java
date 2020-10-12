@@ -1,11 +1,9 @@
 package ru.rashgild.service;
 
 import com.sun.jersey.api.client.ClientResponse;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ru.rashgild.dao.PersonDao;
 import ru.rashgild.model.medos.Patient;
 import ru.rashgild.model.promed.Person;
@@ -22,20 +20,17 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public Person getPersonFromPromed(Patient patient) {
-        ClientResponse response = dao.getPersonByData(patient);
-        return getPerson(response);
+        return getPerson(dao.getPersonByData(patient));
     }
 
     @Override
     public Person getPersonBySnils(String snils) {
-        ClientResponse response = dao.getPersonBySnils(snils);
-        return getPerson(response);
+        return getPerson(dao.getPersonBySnils(snils));
     }
 
     @Override
     public Person getPersonById(int id) {
-        ClientResponse response = dao.getPersonByIdFormPromed(id);
-        return getPerson(response);
+        return getPerson(dao.getPersonByIdFormPromed(id));
     }
 
     private Person getPerson(ClientResponse response) {

@@ -2,10 +2,14 @@ package ru.rashgild.model.promed;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
 public class DateTable {
 
     @JsonProperty("TimeTableGraf_id")
@@ -14,44 +18,14 @@ public class DateTable {
     @JsonProperty("Person_id")
     private int personId;
 
-    public int getDateId() {
-        return dateId;
-    }
-
-    public void setDateId(int dateId) {
-        this.dateId = dateId;
-    }
-
-    public int getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(int personId) {
-        this.personId = personId;
-    }
-
+    @Getter
+    @Setter
     public static class Data {
 
         @JsonProperty("data")
-        private List<DateTable> data;
+        private List<DateTable> dateTables;
 
         @JsonProperty("error_code")
         private String errorCode;
-
-        public List<DateTable> getData() {
-            return data;
-        }
-
-        public void setData(List<DateTable> data) {
-            this.data = data;
-        }
-
-        public String getErrorCode() {
-            return errorCode;
-        }
-
-        public void setErrorCode(String errorCode) {
-            this.errorCode = errorCode;
-        }
     }
 }

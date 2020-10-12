@@ -7,11 +7,15 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
 public class MedStaff {
 
     private Integer id;
@@ -43,28 +47,14 @@ public class MedStaff {
     private Integer lpuId;
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
+    @Setter
     public static class MedstaffList {
 
         @JsonProperty("error_code")
         private Integer error;
 
         @JsonProperty("data")
-        private List<MedStaff> medStaffList;
-
-        public List<MedStaff> getMedStaffList() {
-            return medStaffList;
-        }
-
-        public void setMedStaffList(List<MedStaff> medStaffList) {
-            this.medStaffList = medStaffList;
-        }
-
-        public Integer getError() {
-            return error;
-        }
-
-        public void setError(Integer error) {
-            this.error = error;
-        }
+        private List<MedStaff> staffList;
     }
 }

@@ -1,6 +1,7 @@
 package ru.rashgild.service;
 
 import com.sun.jersey.api.client.ClientResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import ru.rashgild.config.Config;
@@ -12,6 +13,7 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 @Service
+@Slf4j
 public class DictionaryServiceImpl implements DictionaryService {
 
     private final DictionaryDao dictionaryDao;
@@ -22,25 +24,30 @@ public class DictionaryServiceImpl implements DictionaryService {
         this.dictionaryDao = dictionaryDao;
     }
 
-    {
+    static {
         Config.disableSslVerification();
     }
 
     @PostConstruct
     private void init() {
-        System.out.println("initialize dictionaries");
-        lpuSectionCacheInit();
+        log.info("initialize dictionaries");
+        try {
+            lpuSectionCacheInit();
+            log.info("initialize dictionaries success");
+        } catch (Exception e) {
+            log.error(e.getLocalizedMessage());
+        }
     }
 
     private void lpuSectionCacheInit() {
         ClientResponse response = dictionaryDao.getLpuDictionarySection();
         if (response.getStatus() == HttpStatus.OK.value()) {
-            LpuSectionDictionary.ResponseData lpuSections = response.getEntity(LpuSectionDictionary.ResponseData.class);
-            if (lpuSections != null && !lpuSections.getData().isEmpty()) {
-                this.lpuSections = lpuSections.getData();
-                System.out.println("lpu sections success initialisation");
+            LpuSectionDictionary.ResponseData sections = response.getEntity(LpuSectionDictionary.ResponseData.class);
+            if (sections != null && sections.getData() != null && !sections.getData().isEmpty()) {
+                this.lpuSections = sections.getData();
+                log.info("lpu sections success initialisation: {}", sections);
             } else {
-                System.err.println(lpuSections.getErrorMessage());
+                log.error(sections != null ? sections.getErrorMessage() : "NPE");
             }
         }
     }
@@ -55,13 +62,12 @@ public class DictionaryServiceImpl implements DictionaryService {
         ClientResponse response = dictionaryDao.getDictionaryMedstaff(medPersonalId, lpuSectionId);
         if (response.getStatus() == HttpStatus.OK.value()) {
             MedstaffDictionary.ResponseData medstaff = response.getEntity(MedstaffDictionary.ResponseData.class);
-            if (medstaff != null && !medstaff.getData().isEmpty()) {
-
-                MedstaffDictionary medstaffDictionary = medstaff.getData().stream().findFirst().get();
+            if (medstaff != null && medstaff.getData() != null && !medstaff.getData().isEmpty()) {
+                MedstaffDictionary medstaffDictionary = medstaff.getData().get(0);
                 medstaffDictionary.setLpuSectionId(lpuSectionId);
                 return medstaffDictionary;
             } else {
-                System.err.println(medstaff.getErrorMessage());
+                log.error("err: {}", medstaff);
             }
         }
         return null;

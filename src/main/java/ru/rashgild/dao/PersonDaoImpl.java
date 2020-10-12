@@ -1,23 +1,18 @@
 package ru.rashgild.dao;
 
 import com.sun.jersey.api.client.ClientResponse;
-import javafx.util.Pair;
-
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
 import ru.rashgild.model.medos.Patient;
 import ru.rashgild.service.AuthService;
+
+import javax.ws.rs.core.MediaType;
+import java.util.Map;
 
 @Repository("PersonDao")
 public class PersonDaoImpl extends AbstractDao implements PersonDao {
 
     private final AuthService service;
-
-    @Value("${promed.endpoint}")
-    private String promedEndpoint;
 
     @Value("${promed.endpoint.person}")
     private String promedEndpointPerson;
@@ -28,7 +23,7 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao {
 
     @Override
     public ClientResponse getPersonByIdFormPromed(Integer personId) {
-        Pair<String, String> header = service.getHeader();
+        Map.Entry<String, String> header = service.getHeader();
         return client
                 .resource(promedEndpoint)
                 .path(promedEndpointPerson)
@@ -40,7 +35,7 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao {
 
     @Override
     public ClientResponse getPersonByData(Patient patient) {
-        Pair<String, String> header = service.getHeader();
+        Map.Entry<String, String> header = service.getHeader();
         return client
                 .resource(promedEndpoint)
                 .path(promedEndpointPerson)
@@ -55,7 +50,7 @@ public class PersonDaoImpl extends AbstractDao implements PersonDao {
 
     @Override
     public ClientResponse getPersonBySnils(String snils) {
-        Pair<String, String> header = service.getHeader();
+        Map.Entry<String, String> header = service.getHeader();
         return client
                 .resource(promedEndpoint)
                 .path(promedEndpointPerson)

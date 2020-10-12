@@ -7,11 +7,15 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
 public class TimeTable {
 
     @JsonProperty("MedStaffFact_id")
@@ -23,44 +27,14 @@ public class TimeTable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateTime;
 
-    public Long getMedStaffFactId() {
-        return medStaffFactId;
-    }
-
-    public void setMedStaffFactId(Long medStaffFactId) {
-        this.medStaffFactId = medStaffFactId;
-    }
-
-    public LocalDateTime getDateTime() {
-        return dateTime;
-    }
-
-    public void setDateTime(LocalDateTime dateTime) {
-        this.dateTime = dateTime;
-    }
-
+    @Getter
+    @Setter
     public static class Data {
 
         @JsonProperty("data")
-        private List<TimeTable> data;
+        private List<TimeTable> timeTables;
 
         @JsonProperty("error_code")
         private String errorCode;
-
-        public List<TimeTable> getData() {
-            return data;
-        }
-
-        public void setData(List<TimeTable> data) {
-            this.data = data;
-        }
-
-        public String getErrorCode() {
-            return errorCode;
-        }
-
-        public void setErrorCode(String errorCode) {
-            this.errorCode = errorCode;
-        }
     }
 }

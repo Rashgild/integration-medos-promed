@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    active: default
+
+sessionId: "sessId"
+
+api:
+  endpoint:
+    polyclinic: "polyclinic"
+    url: "http://medos/api/"
+    evnResponse: "setEvnTap"
+    schedule: "schedule/"
+  token: "token"
+
+lpu:
+  id: 123
+
+promed:
+  login: "login"
+  password: "password"
+  endpoint:
+    url: "https://astrahan.promedweb.ru/"
+    evnBase: "api/EvnPLBase"
+    evnVisit: "api/EvnVizitPL"
+    diary: "api/XmlDocument"
+    person: "api/Person"
+    login: "api/user/login"
+    logout: "api/user/logout"
+    workplace: "api/WorkPlace"
+  dictionary:
+    medstaff: "api/MedStaffFactByMedPersonal"
+    lpuSection: "api/Lpu/LpuSectionListByMO"
+
+promedapi:
+  endpoint:
+    polyclinic: "getPolyclinicCase"
+
+cron:
+  schedule: "* 12 12 * * *"

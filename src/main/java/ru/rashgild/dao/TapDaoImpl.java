@@ -1,23 +1,18 @@
 package ru.rashgild.dao;
 
 import com.sun.jersey.api.client.ClientResponse;
-
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-
 import ru.rashgild.model.promed.Evn;
 import ru.rashgild.model.promed.EvnVisit;
 import ru.rashgild.model.promed.EvnXmlDiary;
-import ru.rashgild.service.AuthService;
+
+import javax.ws.rs.core.MediaType;
 
 @Repository("TapDao")
 public class TapDaoImpl extends AbstractDao implements TapDao {
 
-    private final AuthService service;
-
-    @Value("${api.endpoint}")
+    @Value("${api.endpoint.url}")
     private String medosApiEndpoint;
 
     @Value("${api.endpoint.polyclinic}")
@@ -35,10 +30,6 @@ public class TapDaoImpl extends AbstractDao implements TapDao {
     @Value("${promed.endpoint.diary}")
     private String promedDiary;
 
-    public TapDaoImpl(AuthService service) {
-        this.service = service;
-    }
-
     @Override
     public ClientResponse getTapFromMedos(String date) {
         return client
@@ -51,8 +42,8 @@ public class TapDaoImpl extends AbstractDao implements TapDao {
     }
 
     @Override
-    public ClientResponse sendResultToMedos(String medcaseId, String evnId) {
-        return client
+    public void sendResultToMedos(String medcaseId, String evnId) {
+        client
                 .resource(medosApiEndpoint)
                 .path(medosApiEndpointEvnResponse)
                 .queryParam("medcase_id", medcaseId)

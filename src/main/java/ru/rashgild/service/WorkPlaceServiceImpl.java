@@ -1,35 +1,34 @@
 package ru.rashgild.service;
 
 import com.sun.jersey.api.client.ClientResponse;
-
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ru.rashgild.dao.WorkPlaceDao;
 import ru.rashgild.model.promed.WorkPlaceDto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service("WorkPlaceService")
 @Transactional
+@Slf4j
+@RequiredArgsConstructor
 public class WorkPlaceServiceImpl implements WorkPlaceService {
 
     private final WorkPlaceDao workPlaceDao;
-
-    public WorkPlaceServiceImpl(WorkPlaceDao workPlaceDao) {
-        this.workPlaceDao = workPlaceDao;
-    }
 
     @Override
     public List<WorkPlaceDto> getWorkPlaceByPersonId(int personId) {
         ClientResponse response = workPlaceDao.getWorkPlaceByPersonId(personId);
         WorkPlaceDto.WorkPlacesDto workPlacesDto = response.getEntity(WorkPlaceDto.WorkPlacesDto.class);
 
-        if (workPlacesDto.getError().equals("0") && workPlacesDto != null && workPlacesDto.getWorkPlaceDtoList() != null) {
+        if (workPlacesDto != null && workPlacesDto.getError().equals("0") && workPlacesDto.getWorkPlaceDtoList() != null) {
             return workPlacesDto.getWorkPlaceDtoList();
         } else {
-            System.err.println(workPlacesDto.getErrorMessage());
+            log.error(workPlacesDto != null ? workPlacesDto.getErrorMessage() : "null");
         }
-        return null;
+        return new ArrayList<>();
     }
 }

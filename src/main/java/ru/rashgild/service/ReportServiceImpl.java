@@ -3,28 +3,31 @@ package ru.rashgild.service;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import ru.rashgild.model.dto.ResponseModel;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
-import org.springframework.stereotype.Service;
-
-import ru.rashgild.model.dto.ResponseModel;
-
 @Service
+@Slf4j
 public class ReportServiceImpl implements ReportService {
+
+    private static final String JSON = ".json";
 
     @Override
     public void saveFile(Object object, String name) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            objectMapper.writeValue(new File("report/" + name + ".json"), object);
+            objectMapper.writeValue(new File("report/" + name + JSON), object);
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            log.error(e.getMessage());
         }
     }
 
@@ -32,12 +35,12 @@ public class ReportServiceImpl implements ReportService {
     public List<ResponseModel> readFile(String name) {
         ObjectMapper objectMapper = new ObjectMapper();
         try {
-            return objectMapper.readValue(new File("report/" + name + ".json"), new TypeReference<List<ResponseModel>>() {
+            return objectMapper.readValue(new File("report/" + name + JSON), new TypeReference<List<ResponseModel>>() {
             });
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            log.error(e.getMessage());
         }
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
@@ -45,40 +48,28 @@ public class ReportServiceImpl implements ReportService {
         File dir = new File("report");
         File[] arrFiles = dir.listFiles();
         List<Report> reports = new ArrayList<>();
-        for (File file : arrFiles) {
-            Report report = new Report(file.getName().replace(".json", ""));
-            reports.add(report);
+        if (arrFiles != null) {
+            for (File file : arrFiles) {
+                Report report = new Report(file.getName().replace(JSON, ""));
+                reports.add(report);
+            }
         }
         return reports;
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     @XmlRootElement
+    @Getter
+    @Setter
     static class Report {
 
         public Report(String date) {
             this.date = date;
-            this.link = "<a href=\"report/epicrisis-export?" + date + ".json\">" + date + "</a>";
+            this.link = "<a href=\"report/epicrisis-export?" + date + JSON + "\">" + date + "</a>";
 
         }
 
         private String date;
         private String link;
-
-        public String getDate() {
-            return date;
-        }
-
-        public void setDate(String date) {
-            this.date = date;
-        }
-
-        public String getLink() {
-            return link;
-        }
-
-        public void setLink(String link) {
-            this.link = link;
-        }
     }
 }

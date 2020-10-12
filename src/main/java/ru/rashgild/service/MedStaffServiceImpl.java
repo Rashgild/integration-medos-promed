@@ -1,22 +1,21 @@
 package ru.rashgild.service;
 
 import com.sun.jersey.api.client.ClientResponse;
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ru.rashgild.dao.MedStaffDao;
 import ru.rashgild.model.MedStaff;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service("MedStaffService")
 @Transactional
+@RequiredArgsConstructor
 public class MedStaffServiceImpl implements MedStaffService {
 
-    @Autowired
-    private MedStaffDao dao;
+    private final MedStaffDao dao;
 
     @Override
     public List<MedStaff> getMedStaffFromPromed(Integer medStaffId) {
@@ -24,11 +23,9 @@ public class MedStaffServiceImpl implements MedStaffService {
         MedStaff.MedstaffList medstaffList = response.getEntity(MedStaff.MedstaffList.class);
         if (medstaffList.getError().equals(0)) {
 
-            List<MedStaff> medStaffs = medstaffList.getMedStaffList();
-            //medStaffs.se(medStaffId);
             //TODO check it, can a list have many entities?
-            return medStaffs;
+            return medstaffList.getStaffList();
         }
-        return null;
+        return new ArrayList<>();
     }
 }

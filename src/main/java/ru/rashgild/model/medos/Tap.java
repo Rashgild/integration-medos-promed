@@ -2,12 +2,16 @@ package ru.rashgild.model.medos;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
+@Getter
+@Setter
 public class Tap {
 
     @JsonProperty("patient")
@@ -28,70 +32,15 @@ public class Tap {
     @JsonProperty("visits")
     private List<Visit> visits;
 
-    public List<Visit> getVisits() {
-        return visits;
-    }
-
     public int getVisitsCount() {
         return getVisits().size();
     }
 
-    public void setVisits(List<Visit> visits) {
-        this.visits = visits;
-    }
-
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public Integer getNumCard() {
-        return numCard;
-    }
-
-    public void setNumCard(Integer numCard) {
-        this.numCard = numCard;
-    }
-
-    public Integer isFinish() {
-        return isFinish;
-    }
-
-    public void setFinish(Integer finish) {
-        isFinish = finish;
-    }
-
-    public Integer getResultClass() {
-        return resultClass;
-    }
-
-    public void setResultClass(Integer resultClass) {
-        this.resultClass = resultClass;
-    }
-
-    public Integer getDiagLid() {
-        return diagLid;
-    }
-
-    public void setDiagLid(Integer diagLid) {
-        this.diagLid = diagLid;
-    }
-
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
+    @Setter
     public static class TapList {
-
         @JsonProperty("tap")
-        private List<Tap> tapList;
-
-        public List<Tap> getTapList() {
-            return tapList;
-        }
-
-        public void setTapList(List<Tap> tapList) {
-            this.tapList = tapList;
-        }
+        private List<Tap> taps;
     }
 }

@@ -1,18 +1,20 @@
 package ru.rashgild.service;
 
 import com.sun.jersey.api.client.ClientResponse;
-import javafx.util.Pair;
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import ru.rashgild.dao.AuthDao;
 import ru.rashgild.model.Token;
 
+import java.util.AbstractMap;
+import java.util.Map;
+
 @Service("AuthService")
 @Transactional
+@Slf4j
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
@@ -24,23 +26,23 @@ public class AuthServiceImpl implements AuthService {
     public Token getToken() {
         if (token == null) {
             ClientResponse response = authDao.getAuthToken();
-            token = response.getEntity(Token.class);
-            return token;
-        } else {
-            return token;
+            if (response.getStatus() == HttpStatus.OK.value()) {
+                token = response.getEntity(Token.class);
+            }
         }
+        return token;
     }
 
     @Override
-    public Pair<String, String> getHeader() {
-        return new Pair<>("Cookie", "PHPSESSID=" + this.getToken().getSessId());
+    public Map.Entry<String, String> getHeader() {
+        return new AbstractMap.SimpleEntry<>("Cookie", "PHPSESSID=" + getSessionId());
     }
 
     @Override
     public boolean logout() {
         ClientResponse response = authDao.logout();
         if (response.getStatus() == HttpStatus.OK.value()) {
-            System.out.println(response.getEntity(String.class));
+            log.info(response.getEntity(String.class));
             this.token = null;
             return true;
         }

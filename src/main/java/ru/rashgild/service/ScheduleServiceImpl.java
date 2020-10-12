@@ -1,20 +1,18 @@
 package ru.rashgild.service;
 
 import com.sun.jersey.api.client.ClientResponse;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import ru.rashgild.dao.ScheduleDao;
 import ru.rashgild.model.medos.ScheduleEntry;
 import ru.rashgild.model.promed.Person;
 import ru.rashgild.model.promed.TimeTable;
 
 @Service("CalendarService")
+@RequiredArgsConstructor
 public class ScheduleServiceImpl implements ScheduleService {
 
-    @Autowired
-    private ScheduleDao dao;
+    private final ScheduleDao dao;
 
     @Override
     public ClientResponse getDateTables(String date) {

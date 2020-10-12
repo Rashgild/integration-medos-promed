@@ -5,17 +5,14 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.json.JSONConfiguration;
-import javafx.util.Pair;
-
-import java.util.Map;
-import javax.annotation.PostConstruct;
-import javax.ws.rs.core.MediaType;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-
 import ru.rashgild.service.AuthService;
+
+import javax.annotation.PostConstruct;
+import javax.ws.rs.core.MediaType;
+import java.util.Map;
 
 abstract class AbstractDao {
 
@@ -27,8 +24,8 @@ abstract class AbstractDao {
     @Autowired
     private AuthService authService;
 
-    @Value("${promed.endpoint}")
-    private String promedEndpoint;
+    @Value("${promed.endpoint.url}")
+    protected String promedEndpoint;
 
     @PostConstruct
     public void init() {
@@ -38,7 +35,7 @@ abstract class AbstractDao {
     }
 
     public WebResource.Builder baseRequest(String path) {
-        Pair<String, String> header = authService.getHeader();
+        Map.Entry<String, String> header = authService.getHeader();
         return client
                 .resource(promedEndpoint)
                 .path(path)
@@ -48,7 +45,7 @@ abstract class AbstractDao {
     }
 
     public WebResource.Builder baseRequest(String path, Map<String, String> queries) {
-        Pair<String, String> header = authService.getHeader();
+        Map.Entry<String, String> header = authService.getHeader();
 
         WebResource a = client
                 .resource(promedEndpoint)

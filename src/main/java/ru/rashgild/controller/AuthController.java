@@ -1,31 +1,30 @@
 package ru.rashgild.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-
 import ru.rashgild.model.Token;
 import ru.rashgild.service.AuthService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/auth")
+@RequiredArgsConstructor
 public class AuthController {
 
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
 
     /**
      * Get session id.
      *
      * @return json with session id
      */
-    @RequestMapping(value = "/get-token", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/get-token", produces = "application/json")
     public ResponseEntity getSessionId() {
         Token token = authService.getToken();
 
@@ -37,7 +36,7 @@ public class AuthController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @RequestMapping(value = "/logout", method = RequestMethod.GET, produces = "application/json")
+    @GetMapping(value = "/logout", produces = "application/json")
     public ResponseEntity logout() {
 
         if (authService.logout()) {

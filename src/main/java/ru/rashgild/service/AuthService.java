@@ -1,14 +1,19 @@
 package ru.rashgild.service;
 
-import javafx.util.Pair;
 
 import ru.rashgild.model.Token;
+
+import java.util.Map;
 
 public interface AuthService {
 
     Token getToken();
 
+    default String getSessionId() {
+        return getToken() != null ? getToken().getSessId() : "";
+    }
+
     boolean logout();
 
-    Pair<String, String> getHeader();
+    Map.Entry<String, String> getHeader();
 }

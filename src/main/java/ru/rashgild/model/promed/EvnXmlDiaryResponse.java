@@ -2,9 +2,11 @@ package ru.rashgild.model.promed;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+import lombok.Setter;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
@@ -12,6 +14,8 @@ public class EvnXmlDiaryResponse {
 
     @XmlRootElement
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
+    @Setter
     public static class ResponseData {
 
         @JsonProperty("error_code")
@@ -21,23 +25,7 @@ public class EvnXmlDiaryResponse {
         private List<EvnXmlDiaryResponse> data;
 
         public boolean isSuccess() {
-            return data != null && data.size() > 0 && error.equals(0);
-        }
-
-        public List<EvnXmlDiaryResponse> getData() {
-            return data;
-        }
-
-        public void setData(List<EvnXmlDiaryResponse> data) {
-            this.data = data;
-        }
-
-        public Integer getError() {
-            return error;
-        }
-
-        public void setError(Integer error) {
-            this.error = error;
+            return data != null && !data.isEmpty() && error.equals(0);
         }
     }
 }

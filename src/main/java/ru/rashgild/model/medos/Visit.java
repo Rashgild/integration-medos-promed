@@ -7,13 +7,17 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.time.LocalDateTime;
 import java.util.List;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement
+@Getter
+@Setter
 public class Visit {
 
     @JsonProperty("MedStaffFact_id")
@@ -63,127 +67,6 @@ public class Visit {
     @JsonProperty("WorkStaffInfo")
     private WorkStaff workStaff;
 
-
-    public Boolean isFirstVisit() {
-        return firstVisit;
-    }
-
-    public void setFirstVisit(Boolean firstVisit) {
-        this.firstVisit = firstVisit;
-    }
-
-    public Long getMedStaffId() {
-        return medStaffId;
-    }
-
-    public void setMedStaffId(Long medStaffId) {
-        this.medStaffId = medStaffId;
-    }
-
-    public Integer getMedosId() {
-        return medosId;
-    }
-
-    public void setMedosId(Integer medosId) {
-        this.medosId = medosId;
-    }
-
-    public Integer getServiceTypeId() {
-        return serviceTypeId;
-    }
-
-    public void setServiceTypeId(Integer serviceTypeId) {
-        this.serviceTypeId = serviceTypeId;
-    }
-
-    public Integer getDeseaseTypeId() {
-        return deseaseTypeId;
-    }
-
-    public void setDeseaseTypeId(Integer deseaseTypeId) {
-        this.deseaseTypeId = deseaseTypeId;
-    }
-
-    public Integer getDiagId() {
-        return diagId;
-    }
-
-    public void setDiagId(Integer diagId) {
-        this.diagId = diagId;
-    }
-
-    public String getDiagCode() {
-        return diagCode;
-    }
-
-    public void setDiagCode(String diagCode) {
-        this.diagCode = diagCode;
-    }
-
-    public Long getLpuSectionId() {
-        return lpuSectionId;
-    }
-
-    public void setLpuSectionId(Long lpuSectionId) {
-        this.lpuSectionId = lpuSectionId;
-    }
-
-    public String getDiary() {
-        return diary;
-    }
-
-    public void setDiary(String diary) {
-        this.diary = diary;
-    }
-
-    public Integer getMedicalCareKindId() {
-        return medicalCareKindId;
-    }
-
-    public void setMedicalCareKindId(Integer medicalCareKindId) {
-        this.medicalCareKindId = medicalCareKindId;
-    }
-
-    public Long getMesId() {
-        return mesId;
-    }
-
-    public void setMesId(Long mesId) {
-        this.mesId = mesId;
-    }
-
-    public String getPayType() {
-        return payType;
-    }
-
-    public void setPayType(String payType) {
-        this.payType = payType;
-    }
-
-    public LocalDateTime getVisitDate() {
-        return visitDate;
-    }
-
-    public void setVisitDate(LocalDateTime visitDate) {
-        this.visitDate = visitDate;
-    }
-
-    public Integer getVisitTypeId() {
-        return visitTypeId;
-    }
-
-    public void setVisitTypeId(Integer visitTypeId) {
-        visitTypeId = visitTypeId;
-    }
-
-    public WorkStaff getWorkStaff() {
-        return workStaff;
-    }
-
-    public void setWorkStaff(WorkStaff workStaff) {
-        this.workStaff = workStaff;
-    }
-
     public boolean checkWarnFields() {
         return this.diagCode != null && this.medStaffId != null && this.lpuSectionId != null;
     }
@@ -218,17 +101,10 @@ public class Visit {
     }
 
     @JsonIgnoreProperties(ignoreUnknown = true)
+    @Getter
+    @Setter
     public static class VisitList {
-
         @JsonProperty("visits")
         private List<Visit> visits;
-
-        public List<Visit> getVisits() {
-            return visits;
-        }
-
-        public void setVisits(List<Visit> visits) {
-            this.visits = visits;
-        }
     }
 }

@@ -1,34 +1,28 @@
 package ru.rashgild.service;
 
 import com.sun.jersey.api.client.ClientResponse;
-
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import ru.rashgild.dao.TapDao;
 import ru.rashgild.model.dto.ResponseModel;
 import ru.rashgild.model.dto.TapRequest;
 import ru.rashgild.model.medos.Tap;
 import ru.rashgild.model.medos.Visit;
 import ru.rashgild.model.medos.WorkStaff;
-import ru.rashgild.model.promed.Evn;
-import ru.rashgild.model.promed.EvnResponse;
-import ru.rashgild.model.promed.EvnVisit;
-import ru.rashgild.model.promed.EvnVisitResponse;
-import ru.rashgild.model.promed.EvnVisits;
-import ru.rashgild.model.promed.EvnXmlDiary;
-import ru.rashgild.model.promed.EvnXmlDiaryResponse;
-import ru.rashgild.model.promed.Person;
-import ru.rashgild.model.promed.WorkPlaceDto;
+import ru.rashgild.model.promed.*;
 import ru.rashgild.model.promed.dictionary.LpuSectionDictionary;
 import ru.rashgild.model.promed.dictionary.MedstaffDictionary;
 
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service("TapService")
+@Slf4j
+@RequiredArgsConstructor
 public class TapServiceImpl implements TapService {
 
     @Value("${lpu.id}")
@@ -38,14 +32,7 @@ public class TapServiceImpl implements TapService {
     private final PersonService personService;
     private final WorkPlaceService workPlaceService;
     private final DictionaryService dictionaryService;
-    private final Long LPU_POLYCLICNIC_UNIT = 82L;
-
-    public TapServiceImpl(TapDao tapDao, PersonService personService, WorkPlaceService workPlaceService, DictionaryService dictionaryService) {
-        this.tapDao = tapDao;
-        this.personService = personService;
-        this.workPlaceService = workPlaceService;
-        this.dictionaryService = dictionaryService;
-    }
+    private static final Long LPU_POLYCLICNIC_UNIT = 82L;
 
     @Override
     public ClientResponse getTapFromMedos(String date) {
@@ -61,7 +48,7 @@ public class TapServiceImpl implements TapService {
         TapRequest tapRequest = new TapRequest();
 
         for (Visit visit : tap.getVisits()) {
-            System.out.println("try process " + visit.getMedosId());
+            log.info("try process:{} ", visit.getMedosId());
 
             if(tap.getResultClass() == null) {
                 tapRequest.setResponseModels(new ResponseModel(visit.getMedosId().toString(), "resultClass is empty"));
@@ -96,7 +83,7 @@ public class TapServiceImpl implements TapService {
                 break;
             }
 
-            System.out.println(doctor.getPersonId() + ">>>>>>>>>>> doc id");
+            log.info("{}>>>>>>>>>>> doc id", doctor.getPersonId());
             //TODO replace : checking
             List<WorkPlaceDto> workPlaceDtos = workPlaceService.getWorkPlaceByPersonId(doctor.getPersonId());
             if (workPlaceDtos == null) {
@@ -133,7 +120,7 @@ public class TapServiceImpl implements TapService {
                 break;
             }
 
-            if (visit.isFirstVisit()) {
+            if (Boolean.TRUE.equals(visit.getFirstVisit())) {
                 evn.setPersonId(person.getPersonId());
                 evn.setMedStaffFactId(medstaffDictionary.getMedstaffId());
                 evn.setLpuSectionId(medstaffDictionary.getLpuSectionId());
@@ -196,7 +183,7 @@ public class TapServiceImpl implements TapService {
                 .filter(tapRequest -> !tapRequest.isHasError() && tapRequest.getEvn() != null)
                 .forEach(tapRequest -> {
                     ResponseModel responseModel = new ResponseModel();
-                    System.out.println("try send " + tapRequest.getEvn().getEvnPlNumCard());
+                    log.info("try send {}", tapRequest.getEvn().getEvnPlNumCard());
                     Evn evn = tapRequest.getEvn();
                     EvnResponse.ResponseData evnResponse = this.sendTapToPromed(evn);
                     if (evnResponse.isSuccess()) {
@@ -213,7 +200,7 @@ public class TapServiceImpl implements TapService {
 
                         //TODO check result
                         String evnXmlDiaryResponse = this.sendDiaryToPromedString(evnXmlDiary);
-                        System.out.println(evnXmlDiaryResponse);
+                        log.info(evnXmlDiaryResponse);
 
                         String baseId = evnResponse.getBaseId();
                         List<EvnVisits> evnVisits = new ArrayList<>();
@@ -229,7 +216,7 @@ public class TapServiceImpl implements TapService {
                             diary.setEvnId(visitResponse.getVisitId());
 
                             evnXmlDiaryResponse = this.sendDiaryToPromedString(diary);
-                            System.out.println(evnXmlDiaryResponse);
+                            log.info(evnXmlDiaryResponse);
                         }
                         responseModel.setMessage("Ok");
                     } else {
